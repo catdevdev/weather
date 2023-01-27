@@ -1,0 +1,16 @@
+@use "../../../../shared/styles/zindexes";
+@use "../../scss/dimensions";
+
+.container {
+  width: 100%;
+  position: fixed;
+  z-index: zindexes.$header;
+  background: #fcfbfd;
+  height: dimensions.$header-height;
+
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.container__logo {
+  width: 100%;
+}

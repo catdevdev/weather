@@ -1,0 +1,18 @@
+@use "../../scss/dimensions";
+
+.container {
+  width: 100%;
+  display: flex;
+
+  &__main {
+    width: 100%;
+  }
+  &__wrapper {
+    padding: dimensions.$sidebar-width;
+    background: #f5f4f6;
+    padding: dimensions.$header-height + 30px 36px 0 dimensions.$sidebar-width +
+      36px;
+
+    min-height: 100vh;
+  }
+}
