@@ -1,5 +1,13 @@
 version: "3"
 services:
+  nestjs:
+    build: ./weather-server
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./weather-server:/app
+    command: start:dev
+
   postgres:
     image: postgres
     environment:
@@ -16,16 +24,6 @@ services:
       - ./weather-app:/app
     command: dev
 
-  nestjs:
-    build: ./weather-server
-    ports:
-      - "9001:9001"
-    volumes:
-      - ./weather-server:/app
-    command: start:dev
-    depends_on:
-      - postgres
-
   flask:
     build: ./weather-algo
     ports:
@@ -34,8 +32,6 @@ services:
       FLASK_ENV: development
     volumes:
       - ./weather-algo:/app
-    depends_on:
-      - postgres
 
 volumes:
   postgres-data:
