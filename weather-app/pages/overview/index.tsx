@@ -5,7 +5,7 @@ import Heading from "@/shared/ui/Heading";
 const Overview = () => {
   return (
     <>
-      <Heading>Overview</Heading>
+      <Heading>Overview3</Heading>
     </>
   );
 };

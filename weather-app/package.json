@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently 'next dev' 'yarn typed-scss-modules . -w --ignoreInitial -n 'none'",
+    "dev": "concurrently 'next dev -p 9000' 'yarn typed-scss-modules . -w --ignoreInitial -n 'none''",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
