@@ -4,7 +4,6 @@ services:
     build: ./weather-server
     ports:
       - "9001:9001"
-      - "5555:5555"
     volumes:
       - ./weather-server:/app
     command: yarn start:dev
