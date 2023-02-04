@@ -10,3 +10,5 @@ docker-compose -f docker-compose.dev.yml up -d --no-deps --build postgres
 
 npx prisma migrate dev --name init
 npx prisma studio
+
+https://stackoverflow.com/questions/71650767/how-can-i-use-the-fields-in-a-graphql-query-to-perform-nested-reads-with-prisma
