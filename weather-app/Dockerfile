@@ -16,5 +16,3 @@ COPY . .
 # Expose the application port
 EXPOSE 9000
 
-# Start the application
-ENTRYPOINT [ "yarn" ]

@@ -4,9 +4,28 @@ services:
     build: ./weather-server
     ports:
       - "9001:9001"
+      - "5555:5555"
     volumes:
       - ./weather-server:/app
-    command: start:dev
+    command: yarn start:dev
+
+  weather-app:
+    build: ./weather-app
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./weather-app:/app
+    command: yarn dev
+
+  flask:
+    build: ./weather-algo
+    ports:
+      - "9002:9002"
+    environment:
+      FLASK_ENV: development
+    volumes:
+      - ./weather-algo:/app
+    command: python app.py
 
   postgres:
     image: postgres
@@ -20,23 +39,6 @@ services:
       POSTGRES_PORT: ${POSTGRES_PORT}
     volumes:
       - postgres-data:/var/lib/postgresql/data
-
-  weather-app:
-    build: ./weather-app
-    ports:
-      - "9000:9000"
-    volumes:
-      - ./weather-app:/app
-    command: dev
-
-  flask:
-    build: ./weather-algo
-    ports:
-      - "9002:9002"
-    environment:
-      FLASK_ENV: development
-    volumes:
-      - ./weather-algo:/app
 
 volumes:
   postgres-data:
