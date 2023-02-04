@@ -13,9 +13,6 @@ RUN yarn clean & yarn cache clean & yarn
 
 COPY . .
 
-# Build the application
-RUN yarn build
-
 # Expose the application port
 EXPOSE 9000
 
