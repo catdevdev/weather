@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:16
+FROM node:lts
 
 # Create and set the working directory
 RUN mkdir -p /app
