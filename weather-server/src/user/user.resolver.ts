@@ -1,20 +1,18 @@
 import { Query, Resolver } from '@nestjs/graphql';
-import { User } from './dto/user.dto';
+import { Prisma } from '@prisma/client';
+import { Relations } from 'src/common/decorators/relations';
+import { PrismaService } from 'src/prisma.service';
+import { User } from './user.dto';
 
-@Resolver()
+@Resolver(() => User)
 export class UserResolver {
+  constructor(public prisma: PrismaService) {}
   @Query(() => [User])
-  async devicesStatus(): Promise<User> {
-    // const devices = await this.devicesService.getAllDevices();
-    // return devices.map(({ device, isOnline }) => {
-    //   return {
-    //     device: { userId: device.id, username: device.username },
-    //     isOnline,
-    //   };
-    // });
-    return {
-      user: '123',
-      password: '231',
-    };
+  async usersWithRelationsResolver(
+    @Relations() relations: { select: Prisma.UserSelect },
+  ): Promise<Partial<User>[]> {
+    return this.prisma.user.findMany({
+      ...relations,
+    });
   }
 }
