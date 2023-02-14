@@ -10,28 +10,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-}
-
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
-}
-
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+  id              Int              @id @default(autoincrement())
+  email           String           @unique
+  username        String           @unique
+  password        String
+  firstname       String?
+  lastname        String?
+  avatarUrl       String?
+  webpageUrl      String?
+  weatherStations WeatherStation[]
+}
+
+model WeatherStation {
+  id             Int             @id @default(autoincrement())
+  name           String?
+  latitude       Float
+  longitude      Float
+  altitude       Int
+  access_token   String?
+  location       String          @unique
+  User           User?           @relation(fields: [userId], references: [id])
+  userId         Int?
+  weatherRecords WeatherRecord[]
+}
+
+model WeatherRecord {
+  id               Int             @id @default(autoincrement())
+  date_recorded    DateTime
+  temperature      Float
+  humidity         Float 
+  pressure         Float
+  windDirection    Float
+  windSpeed        Float
+  WeatherStation   WeatherStation? @relation(fields: [weatherStationId], references: [id])
+  weatherStationId Int?
 }

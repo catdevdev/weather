@@ -8,6 +8,8 @@ docker-compose -f docker-compose.dev.yml up -d --no-deps --build postgres
 
 
 
+docker volume rm weather_postgres-data
+
 npx prisma migrate dev --name init
 npx prisma studio
 

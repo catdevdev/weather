@@ -12,7 +12,6 @@ export class UserResolver {
   async usersWithRelationsResolver(
     @Relations() relations: { select: Prisma.UserSelect },
   ): Promise<Partial<User>[]> {
-    console.log(relations);
     return this.prisma.user.findMany({
       ...relations,
     });
