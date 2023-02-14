@@ -11,14 +11,21 @@ datasource db {
 }
 
 model User {
-  id              Int              @id @default(autoincrement())
-  email           String           @unique
-  username        String           @unique
-  password        String
-  firstname       String?
-  lastname        String?
-  avatarUrl       String?
-  webpageUrl      String?
+  id Int @id @default(autoincrement())
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  email      String   @unique
+  username   String   @unique
+  firstname  String?
+  lastname   String?
+  avatarUrl  String?
+  webpageUrl String?
+
+  hash            String
+  hashedRt        String?
+  
   weatherStations WeatherStation[]
 }
 
@@ -39,7 +46,7 @@ model WeatherRecord {
   id               Int             @id @default(autoincrement())
   date_recorded    DateTime
   temperature      Float
-  humidity         Float 
+  humidity         Float
   pressure         Float
   windDirection    Float
   windSpeed        Float
