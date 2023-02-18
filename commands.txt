@@ -6,9 +6,10 @@ docker-compose --env-file=dev.env -f docker-compose.dev.yml up --build
 
 docker-compose -f docker-compose.dev.yml up -d --no-deps --build postgres
 
-
-
 docker volume rm weather_postgres-data
+
+docker-compose -f docker-compose.dev.yml exec nestjs bash
+
 
 npx prisma migrate dev --name init
 npx prisma studio
