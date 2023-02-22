@@ -3,7 +3,8 @@ version: 1.0.0
 description: ""
 main: index.js
 scripts:
-  dev: concurrently "pnpm -F=weather-app dev" "pnpm -F=weather-server start:dev"
+  # dev: concurrently "pnpm -F=weather-app dev" "pnpm -F=weather-server start:dev" "flask run --port 9002"
+  dev: concurrently "pnpm -F=weather-app dev" "pnpm -F=weather-server start:dev" "cd weather-algo && source venv/bin/activate && flask run --port=9002"
 keywords: []
 author: ""
 license: ISC
