@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres
     ports:
-      - "5432:5432"
+      - "9011:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -14,4 +14,4 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
 volumes:
-  postgres-data-dev:
+  postgres-data:
