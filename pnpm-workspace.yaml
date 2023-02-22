@@ -1,0 +1,3 @@
+packages:
+  - "weather-app"
+  - "weather-server"
