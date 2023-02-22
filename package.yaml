@@ -9,3 +9,4 @@ author: ""
 license: ISC
 devDependencies:
   concurrently: ^7.6.0
+  typescript: ^4.9.5
