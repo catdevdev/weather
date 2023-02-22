@@ -3,7 +3,9 @@ version: 1.0.0
 description: ""
 main: index.js
 scripts:
-  dev: concurrently "pnpm -F=rockets-client dev" "pnpm -F=rockets-server start"
+  dev: concurrently "pnpm -F=weather-app dev" "pnpm -F=weather-server start:dev"
 keywords: []
 author: ""
 license: ISC
+devDependencies:
+  concurrently: ^7.6.0
