@@ -6,8 +6,7 @@
     "dev": "concurrently 'next dev -p 9000' 'yarn typed-scss-modules . -w --ignoreInitial -n 'none''",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare": "husky install"
+    "lint": "next lint"
   },
   "dependencies": {
     "@ls-lint/ls-lint": "^1.11.2",
@@ -30,7 +29,6 @@
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
-    "husky": "^8.0.0",
     "sass-alias": "^2.0.0",
     "typed-scss-modules": "^7.0.2"
   }
