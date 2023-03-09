@@ -41,5 +41,3 @@ export class UserService {
     });
   }
 }
-
-//   ...relations.select,
