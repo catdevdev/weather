@@ -4,7 +4,7 @@ import { PrismaService } from '@prisma/prisma.service';
 import { Relations } from 'src/common/decorators/relations';
 import { UserService } from '../user.service';
 import { Select } from '@prisma/prisma.types';
-import { User } from './user.dto';
+import { User } from './user.gq-type';
 
 @Resolver(() => User)
 export class UserResolver {
