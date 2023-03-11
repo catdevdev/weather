@@ -16,7 +16,7 @@ export class UserService {
       where: {
         id,
       },
-      select: relations.select,
+      select: relations?.select,
     });
   }
 
@@ -28,29 +28,36 @@ export class UserService {
       where: {
         username,
       },
-      select: relations.select,
+      select: relations?.select,
     });
   }
 
-  // async createUser(
-  //   data: User,
-  //   relations: Select<Prisma.UserSelect>,
-  // ): Promise<Partial<User>> {
-  //   return this.prisma.user.create({
-  //     select: relations.select,
-  //     data: { email: '123' },
-  //   });
-
   async createUser(
     data: CreateUserDto,
-    relations: Select<Prisma.UserSelect>,
+    relations?: Select<Prisma.UserSelect>,
   ): Promise<Partial<User>> {
     return this.prisma.user.create({
       data: {
         email: data.email,
         hash: data.hash,
       },
-      select: relations.select,
+      select: relations?.select,
+    });
+  }
+
+  async updateRtHash(
+    hashedRt: string,
+    userId: number,
+    relations?: Select<Prisma.UserSelect>,
+  ): Promise<Partial<User>> {
+    return this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        hashedRt,
+      },
+      select: relations?.select,
     });
   }
 }

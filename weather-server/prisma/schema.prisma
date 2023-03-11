@@ -13,19 +13,19 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  email      String   @unique
-  username   String?   @unique
+  email      String  @unique
+  username   String? @unique
   firstname  String?
   lastname   String?
   avatarUrl  String?
   webpageUrl String?
 
-  hash            String
-  hashedRt        String?
-  
+  hash     String
+  hashedRt String?
+
   weatherStations WeatherStation[]
 }
 

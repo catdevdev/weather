@@ -3,17 +3,16 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { HashingUtilsHelper } from './helpers';
+import { AtStrategy, RtStrategy } from './strategies';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, AtStrategy, RtStrategy],
   imports: [
     forwardRef(() => UserModule),
-    JwtModule.register({
-      secret: process.env.PRIVATE_JWT_KEY || 'SECRET',
-      signOptions: { expiresIn: '24h' },
-    }),
+    JwtModule.register({}),
+    HashingUtilsHelper,
   ],
-  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
