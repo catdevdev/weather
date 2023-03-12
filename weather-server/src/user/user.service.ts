@@ -11,7 +11,7 @@ export class UserService {
   async getUserById(
     id: number,
     relations?: Select<Prisma.UserSelect>,
-  ): Promise<Partial<User>> {
+  ): Promise<Partial<User>> | null {
     return this.prisma.user.findUnique({
       where: {
         id,
@@ -20,13 +20,13 @@ export class UserService {
     });
   }
 
-  async getUserByUsername(
-    username: string,
+  async getUserByEmail(
+    email: string,
     relations?: Select<Prisma.UserSelect>,
-  ): Promise<Partial<User>> {
+  ): Promise<Partial<User>> | null {
     return this.prisma.user.findUnique({
       where: {
-        username,
+        email,
       },
       select: relations?.select,
     });
@@ -46,8 +46,8 @@ export class UserService {
   }
 
   async updateRtHash(
-    hashedRt: string,
     userId: number,
+    hashedRt: string,
     relations?: Select<Prisma.UserSelect>,
   ): Promise<Partial<User>> {
     return this.prisma.user.update({
@@ -58,6 +58,21 @@ export class UserService {
         hashedRt,
       },
       select: relations?.select,
+    });
+  }
+
+  async removeRtHash(userId: number): Promise<void> {
+    console.log(userId);
+    await this.prisma.user.updateMany({
+      where: {
+        id: userId,
+        hashedRt: {
+          not: null,
+        },
+      },
+      data: {
+        hashedRt: null,
+      },
     });
   }
 }
