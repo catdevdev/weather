@@ -1,5 +1,13 @@
-import { render } from 'preact'
-import { App } from './app'
-import './index.css'
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import GlobalStyles from './app/styles/GlobalStyles'
+import App from './App'
 
-render(<App />, document.getElementById('app') as HTMLElement)
+const container = document.getElementById('root')
+const root = createRoot(container!)
+root.render(
+  <React.StrictMode>
+    <GlobalStyles />
+    <App />
+  </React.StrictMode>,
+)

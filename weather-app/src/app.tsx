@@ -1,33 +1,31 @@
-import { useState } from "preact/hooks";
-import preactLogo from "./assets/preact.svg";
-import viteLogo from "/vite.svg";
-import "./app.css";
+import React from 'react'
+import tw from 'twin.macro'
+import { Button, Logo } from './shared/ui'
+import WidgetCard from './shared/ui/WidgetCard'
+import TodoList from './widget/TodoList'
 
-export function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://preactjs.com" target="_blank">
-          <img src={preactLogo} class="logo preact" alt="Preact logo" />
-        </a>
-      </div>
-      <h1>Vite + Preact</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/app.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs">
-        Click on the Vite and Preact logos to learn more
-      </p>
-    </>
-  );
+const styles = {
+  // Move long class sets out of jsx to keep it scannable
+  container: ({ hasBackground }: { hasBackground: boolean }) => [
+    tw`flex flex-col items-center justify-center h-screen`,
+    hasBackground && tw`bg-gradient-to-b from-electric to-ribbon`,
+  ],
 }
+
+const App = () => (
+  <div>
+    <TodoList></TodoList>
+    {/* <div tw='bg-red-500' ></div> */}
+    {/* <div className="flex flex-col justify-center h-full gap-y-5"></div>
+    <div tw="flex flex-col justify-center h-full gap-y-5">
+      <Button tw="bg-red-600" variant="primary">
+        Submit
+      </Button>
+      <Button variant="secondary">Cancel</Button>
+      <Button isSmall>Close</Button>
+    </div>
+    <Logo /> */}
+  </div>
+)
+
+export default App

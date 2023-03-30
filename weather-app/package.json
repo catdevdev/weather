@@ -1,20 +1,31 @@
 {
   "name": "weather-app",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "babelMacros": {
+    "twin": {
+      "preset": "emotion"
+    }
+  },
   "scripts": {
-    "dev": "vite --port 9000 --host",
+    "dev": "NODE_ENV=development vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "serve": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.13.0",
-    "wouter": "^2.10.0"
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.5.0",
-    "typescript": "^4.9.3",
-    "vite": "^4.2.0"
+    "@babel/plugin-transform-react-jsx": "^7.19.0",
+    "@emotion/babel-plugin-jsx-pragmatic": "^0.2.0",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react": "^3.0.0",
+    "tailwindcss": "^3.2.4",
+    "twin.macro": "^3.1.0",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.0"
   }
 }
