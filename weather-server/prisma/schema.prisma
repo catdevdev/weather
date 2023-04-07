@@ -30,13 +30,10 @@ model User {
 }
 
 model WeatherStation {
-  id             Int             @id @default(autoincrement())
-  name           String?
+  id             String          @id @default(uuid())
   latitude       Float
   longitude      Float
-  altitude       Int
-  access_token   String?
-  location       String          @unique
+  api_key        String          @unique
   User           User?           @relation(fields: [userId], references: [id])
   userId         Int?
   weatherRecords WeatherRecord[]
@@ -44,12 +41,13 @@ model WeatherStation {
 
 model WeatherRecord {
   id               Int             @id @default(autoincrement())
-  date_recorded    DateTime
-  temperature      Float
-  humidity         Float
-  pressure         Float
-  windDirection    Float
-  windSpeed        Float
+  createAt         DateTime        @default(now())
+  temperature      Float?
+  humidity         Float?
+  pressure         Float?
+  windDirection    Float?
+  windSpeed        Float?
+  precipitation    Float?
   WeatherStation   WeatherStation? @relation(fields: [weatherStationId], references: [id])
-  weatherStationId Int?
+  weatherStationId String?
 }
