@@ -14,8 +14,8 @@ import { AtStrategy, RtStrategy } from '@auth/strategies';
 import { AuthModule } from '@auth/auth.module';
 import { WeatherStationService } from './weatherstation/weatherstation.service';
 import { WeatherStationController } from './weatherstation/weatherstation.controller';
-import { WeatherStationRecordService } from './weather-station-record/weatherstation-record.service';
-import { WeatherStationRecordController } from './weather-station-record/weatherstation-record.controller';
+import { WeatherStationRecordService } from './weatherstation-record/weatherstation-record.service';
+import { WeatherStationRecordController } from './weatherstation-record/weatherstation-record.controller';
 
 @Module({
   imports: [
