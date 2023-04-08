@@ -1,5 +1,7 @@
 import tw, { css, styled, theme } from 'twin.macro'
 
+import { Header } from '@widgets/Layout'
+
 interface ButtonProps {
   variant?: 'primary' | 'secondary'
   isSmall?: boolean

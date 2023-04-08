@@ -1,6 +1,8 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import GlobalStyles from './app/styles/GlobalStyles'
+
+import GlobalStyles from '@shared/styles/GlobalStyles'
+
 import App from './App'
 
 const container = document.getElementById('root')
