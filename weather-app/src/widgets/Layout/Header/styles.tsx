@@ -1,3 +1,3 @@
 import tw from 'twin.macro'
 
-export const HeaderContainer = tw.header`h-24 fixed drop-shadow-xl`
+export const Container = tw.header`flex items-center w-full h-[80px] pl-[400px] fixed bg-slate-50 drop-shadow-xl`

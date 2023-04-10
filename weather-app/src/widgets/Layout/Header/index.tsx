@@ -1,9 +1,13 @@
 import React from 'react'
 
-import { HeaderContainer } from './styles'
+import * as S from './styles'
 
-const Header = () => {
-  return <HeaderContainer>123</HeaderContainer>
+interface HeaderProps {
+  children: React.ReactElement
+}
+
+const Header = ({ children }: HeaderProps) => {
+  return <S.Container>{children}</S.Container>
 }
 
 export { Header }

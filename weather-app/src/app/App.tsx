@@ -1,14 +1,12 @@
 import React from 'react'
+import { BrowserRouter, Router } from 'react-router-dom'
 
-import { Header } from '@widgets/Layout'
+import { Routing } from '@pages/index'
 
 const App = () => (
-  <div>
-    1234fddfsdf sf
-    <Header></Header>
-  </div>
+  <BrowserRouter>
+    <Routing />
+  </BrowserRouter>
 )
-
-export const test = () => {}
 
 export default App
