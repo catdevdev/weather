@@ -15,5 +15,4 @@ jobs:
 
       - name: Build and run application
         run: |
-          docker-compose -f docker-compose.prod.yml up --build
-          docker-compose -f docker-compose.prod.yml up -d
+          docker-compose -f docker-compose.prod.yml up --build -d
