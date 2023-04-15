@@ -18,22 +18,40 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Send message to Telegram group
+        id: start-message
         uses: appleboy/telegram-action@master
         with:
           token: ${{ env.TELEGRAM_BOT_TOKEN }}
           to: ${{ env.TELEGRAM_GROUP_ID }}
           message: |
             Weather deployment starts 🌧
+            Repository: ${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}
+            Event: ${{ github.event_name }}
+            Time: ${{ github.event.head_commit.timestamp }}
 
       - name: Build and run application
         run: |
           docker-compose -f docker-compose.prod.yml up --build -d
 
       - name: Send message to Telegram group
+        id: end-message
         uses: appleboy/telegram-action@master
         with:
           token: ${{ env.TELEGRAM_BOT_TOKEN }}
           to: ${{ env.TELEGRAM_GROUP_ID }}
           message: |
-            Weather deployment've been finished 🌧
+            Weather deployment has finished 🌧
+            Repository: ${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}
+            Event: ${{ github.event_name }}
+            Start Time: ${{ steps.start-message.outputs.response.timestamp }}
+            End Time: ${{ github.event.head_commit.timestamp }}
+            Duration: ${{ formatDuration(durationSeconds) }}
             http://46.175.147.63:9000/
+        env:
+          DURATION_START_TIME: ${{ steps.start-message.outputs.response.timestamp }}
+
+      - name: Calculate duration
+        id: duration
+        run: |
+          durationSeconds=$(($(date +%s) - $(date -d "${{ env.DURATION_START_TIME }}" +%s)))
+        shell: bash
