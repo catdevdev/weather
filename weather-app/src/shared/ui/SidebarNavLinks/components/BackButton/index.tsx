@@ -4,10 +4,12 @@ import { NavLinkProps } from 'react-router-dom'
 
 import { NavLink } from '../NavLink'
 
-interface BackButtonProps extends NavLinkProps {}
+interface BackButtonProps extends NavLinkProps {
+  children: string
+}
 
-const BackButton = ({ ...props }: BackButtonProps) => {
-  return <NavLink {...props} icon={BsArrowLeftShort}></NavLink>
+const BackButton = ({ children,...props }: BackButtonProps) => {
+  return <NavLink {...props} icon={BsArrowLeftShort}>{children}</NavLink>
 }
 
 export { BackButton }

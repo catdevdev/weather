@@ -6,15 +6,26 @@ import { NavLinkProps as NavLinkPropsRouter } from 'react-router-dom'
 import * as S from './styles'
 
 interface NavLinkProps extends NavLinkPropsRouter {
+  children: string
   icon: IconType
 }
 
-const NavLink = ({ icon: Icon, ...props }: NavLinkProps) => {
+const NavLink = ({ children, icon: Icon, ...props }: NavLinkProps) => {
   return (
     <S.NavLink
       {...props}
       children={({ isActive }) =>
-        isActive ? <Icon color="black" /> : <Icon color="gray" />
+        isActive ? (
+          <S.NavLinkWrapper>
+            <Icon color="black" />
+            {children}
+          </S.NavLinkWrapper>
+        ) : (
+          <S.NavLinkWrapper>
+            <Icon color="gray" />
+            {children}
+          </S.NavLinkWrapper>
+        )
       }
     />
   )

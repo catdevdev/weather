@@ -9,9 +9,17 @@ const MainNavigationSidebar = () => {
     <>
       <SidebarNavLinks
         navLinks={
-          <NavLink icon={WiNightRainMix} to={'/'}>
-            Overview
-          </NavLink>
+          <>
+            <NavLink icon={WiNightRainMix} to={'/'}>
+              Overview
+            </NavLink>
+            <NavLink icon={WiNightRainMix} to={'/ad'}>
+              Overview
+            </NavLink>
+            <NavLink icon={WiNightRainMix} to={'/sdfdsf'}>
+              Overview
+            </NavLink>
+          </>
         }
       />
     </>

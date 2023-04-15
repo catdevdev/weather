@@ -3,10 +3,14 @@ import tw, { styled, css } from 'twin.macro'
 
 export const NavLink = styled(NavLinkRouter)`
   ${css`
-    ${tw`text-neutral-500 text-base`};
+    ${tw` text-black text-base`};
 
-    .active {
-      ${tw`text-black`};
+    &.active {
+      ${tw`text-fuchsia-700 `};
     }
   `}
+`
+
+export const NavLinkWrapper = tw.div`
+  flex
 `

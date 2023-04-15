@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"yarn workspace weather-app dev\" \"yarn workspace weather-server start:dev\" \"cd weather-algo && source venv/bin/activate && flask run --port=9002\""
+    "dev": "concurrently \"yarn workspace weather-app dev\" \"yarn workspace weather-server dev\" \"cd weather-algo && source venv/bin/activate && flask run --port=9002\""
   },
   "private": true,
   "workspaces": [

@@ -1,17 +1,28 @@
 import React from 'react'
 import { WiNightAltRainMix } from 'react-icons/wi'
+import { NavLinkProps as NavLinkPropsRouter } from 'react-router-dom'
 
 import * as S from './styles'
 
-const Navlink = () => {
+interface NavLinkProps extends NavLinkPropsRouter {
+  children: string
+}
+
+const Navlink = ({ children }: NavLinkProps) => {
   return (
     <S.NavLink
       to={'/'}
       children={({ isActive }) =>
         isActive ? (
-          <WiNightAltRainMix color="black" />
+          <div>
+            <WiNightAltRainMix color="black" />
+            {children}
+          </div>
         ) : (
-          <WiNightAltRainMix color="gray" />
+          <div>
+            <WiNightAltRainMix color="gray" />
+            {children}
+          </div>
         )
       }
     />
