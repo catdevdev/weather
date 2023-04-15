@@ -66,6 +66,5 @@ jobs:
 
       - name: Start server
         run: |
-          cd weather-algo
           source venv/bin/activate
           flask run --port=9002
