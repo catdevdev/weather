@@ -9,6 +9,15 @@ jobs:
   build-and-run:
     runs-on: self-hosted
 
+    - name: Send message to Telegram group
+      uses: appleboy/telegram-action@master
+      if: always()
+      with:
+        token: ${{ env.TELEGRAM_BOT_TOKEN }}
+        to: ${{ env.TELEGRAM_GROUP_ID }}
+        message: |
+          Weather deployment starts 🌧
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -16,3 +25,14 @@ jobs:
       - name: Build and run application
         run: |
           docker-compose -f docker-compose.prod.yml up --build -d
+
+
+    - name: Send message to Telegram group
+      uses: appleboy/telegram-action@master
+      if: always()
+      with:
+        token: ${{ env.TELEGRAM_BOT_TOKEN }}
+        to: ${{ env.TELEGRAM_GROUP_ID }}
+        message: |
+          Weather deployment've been finished 🌧
+          http://46.175.147.63:9000/
