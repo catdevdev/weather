@@ -2,17 +2,23 @@
 FROM node:lts
 
 # Create and set the working directory
-RUN mkdir -p /app
 WORKDIR /app
 
 # Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Install dependencies
 RUN yarn install
+RUN yarn add @nestjs/cli -G
 
 # Copy the rest of the application code
 COPY . .
 
-# Expose the application port
+# Build the application
+RUN yarn build
+
 EXPOSE 9001
+
+# Start the application in production mode
+# CMD [ "yarn", "start:prod" ]
+CMD [ "node", "dist/main.js" ]

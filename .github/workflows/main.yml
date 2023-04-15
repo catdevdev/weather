@@ -2,69 +2,18 @@ name: CI
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches:
+      - main
 
 jobs:
-  nestjs:
+  build-and-run:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build
-        run: yarn workspace weather-server build
-
-      - name: Test
-        run: yarn workspace weather-server test
-
-      - name: Start production server
-        run: yarn workspace weather-server start:prod
-
-  vite:
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build
-        run: yarn workspace weather-app build
-
-      - name: Test
-        run: yarn workspace weather-app test
-
-      - name: Start server
-        run: yarn workspace weather-app serve
-
-  python:
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
+      - name: Build and run application
         run: |
-          cd weather-algo
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
-
-      - name: Start server
-        run: |
-          source venv/bin/activate
-          flask run --port=9002
+          docker-compose -f docker-compose.prod.yml up --build
+          docker-compose -f docker-compose.prod.yml up -d

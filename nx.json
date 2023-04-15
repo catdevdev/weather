@@ -1,0 +1,12 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [],
+        "accessToken": "MjI2ODBiYTMtZDFmMC00MjEzLTkxZjktMDc2NWRmODM5NzA1fHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "defaultBase": "master"
+}

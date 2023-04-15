@@ -1,18 +1,21 @@
-# Use an official Node.js runtime as the base image
+# Use an official Node runtime as a parent image
 FROM node:lts
 
-# Create and set the working directory
-RUN mkdir -p /app
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
-
-# Install dependencies
-RUN yarn clean & yarn cache clean & yarn
-
+# Copy the package.json and yarn.lock files to the container
+# COPY package.json yarn.lock ./
 COPY . .
 
-# Expose the application port
-EXPOSE 9000
+# Install project dependencies
+RUN yarn install
 
+# Copy the entire project to the container
+# COPY . .
+
+# Build the project
+RUN yarn build
+
+# Set the default command to start the project
+CMD ["yarn", "start"]

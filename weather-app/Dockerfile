@@ -2,14 +2,13 @@
 FROM node:lts
 
 # Create and set the working directory
-RUN mkdir -p /app
 WORKDIR /app
 
 # Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Install dependencies
-RUN yarn clean & yarn cache clean & yarn
+RUN yarn install
 
 COPY . .
 
