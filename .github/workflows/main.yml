@@ -19,7 +19,6 @@ jobs:
 
       - name: Send message to Telegram group
         uses: appleboy/telegram-action@master
-        if: always()
         with:
           token: ${{ env.TELEGRAM_BOT_TOKEN }}
           to: ${{ env.TELEGRAM_GROUP_ID }}
@@ -32,7 +31,6 @@ jobs:
 
       - name: Send message to Telegram group
         uses: appleboy/telegram-action@master
-        if: always()
         with:
           token: ${{ env.TELEGRAM_BOT_TOKEN }}
           to: ${{ env.TELEGRAM_GROUP_ID }}
