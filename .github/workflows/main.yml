@@ -37,13 +37,13 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: yarn workspace vite build
+        run: yarn workspace weather-app build
 
       - name: Test
-        run: yarn workspace vite test
+        run: yarn workspace weather-app test
 
       - name: Start server
-        run: yarn workspace vite serve
+        run: yarn workspace weather-app serve
 
   python:
     runs-on: self-hosted
