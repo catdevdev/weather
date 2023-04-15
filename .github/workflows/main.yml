@@ -18,13 +18,13 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: yarn workspace nestjs build
+        run: yarn workspace weather-server build
 
       - name: Test
-        run: yarn workspace nestjs test
+        run: yarn workspace weather-server test
 
       - name: Start production server
-        run: yarn workspace nestjs start:prod
+        run: yarn workspace weather-server start:prod
 
   vite:
     runs-on: self-hosted
