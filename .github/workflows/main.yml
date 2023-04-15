@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+env:
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_GROUP_ID: ${{ secrets.TELEGRAM_GROUP_ID }}
+
 jobs:
   build-and-run:
     runs-on: self-hosted
