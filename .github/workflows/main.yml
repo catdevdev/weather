@@ -23,8 +23,7 @@ jobs:
           token: ${{ env.TELEGRAM_BOT_TOKEN }}
           to: ${{ env.TELEGRAM_GROUP_ID }}
           message: |
-            Weather deployment has started 🌧
-            Start time: $(date +"%Y-%m-%d %H:%M:%S")
+            Weather deployment has started 🌧🌪
 
       - name: Build and run application
         run: |
@@ -38,8 +37,5 @@ jobs:
           token: ${{ env.TELEGRAM_BOT_TOKEN }}
           to: ${{ env.TELEGRAM_GROUP_ID }}
           message: |
-            Weather deployment has finished 🌧
-            Start time: $(date +"%Y-%m-%d %H:%M:%S")
-            End time: $(date +"%Y-%m-%d %H:%M:%S")
-            Duration: $((end_time - start_time)) seconds
+            Weather deployment has finished 🌧🌪
             http://46.175.147.63:9000/
