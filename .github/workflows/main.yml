@@ -59,11 +59,13 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd weather-algo
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
 
       - name: Start server
         run: |
+          cd weather-algo
           source venv/bin/activate
           flask run --port=9002
