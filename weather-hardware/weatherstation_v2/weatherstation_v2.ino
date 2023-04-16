@@ -14,8 +14,8 @@
 // including json library
 #include <ArduinoJson.h>
 
-const char *ssid = "JOJO";
-const char *password = "4311067vladvk";
+const char *ssid = "JOJO 2.4G";
+const char *password = "1234567890bb";
 
 BMP180 myBMP(BMP180_ULTRAHIGHRES);
 DHTesp dht22;
@@ -34,34 +34,34 @@ LoRa_E22 e22ttl100(PIN_RX, PIN_TX, PIN_AX, PIN_M0, PIN_M1);
 
 struct WEATHER_DATA
 {
-  char username[30] = "weatherstation_home";
-  char password[30] = "4311067vladvk";
+//  char username[30] = "weatherstation_home";
+//  char password[30] = "4311067vladvk";
   int pressureFromBMP180;
   double temperatureFromBMP180;
   double temperatureFromDTH22;
   double humidityFromDTH22;
   int analogSignalFromRainSensor;
-  int rssi;
+//  int rssi;
 };
 
-struct WEATHER_STATION_AUTH
-{
-  String token;
-  boolean isAuthorized = false;
-};
+//struct WEATHER_STATION_AUTH
+//{
+//  String token;
+//  boolean isAuthorized = false;
+//};
 
 WEATHER_DATA ownWeatherData;
-WEATHER_DATA weatherDataFromSomeWeatherStation;
+//WEATHER_DATA weatherDataFromSomeWeatherStation;
 
-WEATHER_STATION_AUTH ownWeatherStationAuth;
-WEATHER_STATION_AUTH someWeatherStationAuth;
+//WEATHER_STATION_AUTH ownWeatherStationAuth;
+//WEATHER_STATION_AUTH someWeatherStationAuth;
 
 void setup()
 {
   Serial.begin(9600);
-  Serial.println("starting e22 sensor...");
-  e22ttl100.begin();
-  Serial.println("success");
+//  Serial.println("starting e22 sensor...");
+//  e22ttl100.begin();
+//  Serial.println("success");
 
   Serial.println("starting wifi...");
   WiFi.begin(ssid, password);
@@ -82,61 +82,24 @@ void setup()
   Serial.println("success");
 }
 
-void sendDataToServer(WEATHER_DATA *weather_data, WEATHER_STATION_AUTH *weatherStationAuth)
+void sendDataToServer(WEATHER_DATA *weather_data)
 {
   Serial.println(weather_data->pressureFromBMP180);
-  Serial.println(weatherStationAuth->isAuthorized);
-  Serial.println(weather_data->pressureFromBMP180);
-  if (!weatherStationAuth->isAuthorized)
-  {
-    http.begin(wifiClient, "http://192.168.1.152:3000/auth/login");
-    http.addHeader("Content-Type", "application/json");
-    char body[200];
-    StaticJsonDocument<400> doc;
 
-    doc["username"] = weather_data->username;
-    doc["password"] = weather_data->password;
-
-    serializeJson(doc, body);
-    Serial.println(body);
-    int httpCode = http.POST(body);
-
-    if (httpCode > 0)
-    {
-      Serial.printf("[HTTP] POST... code: %d\n", httpCode);
-      String payload = http.getString();
-      Serial.println(payload);
-      StaticJsonDocument<1000> payloadJson;
-      DeserializationError error = deserializeJson(payloadJson, payload);
-      Serial.println(error.f_str());
-      String token = payloadJson["token"];
-      weatherStationAuth->token = token;
-      weatherStationAuth->isAuthorized = true;
-      Serial.println(weatherStationAuth->token);
-      Serial.println(weatherStationAuth->isAuthorized);
-    }
-    else
-    {
-      Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
-    }
-  }
   StaticJsonDocument<400> doc;
-  http.begin(wifiClient, "http://192.168.1.152:3000/weather-record");
+  http.begin(wifiClient, "http://46.175.147.63:9001/weatherstation/create-weather-record/74c8d74e-c5a7-4ab0-95e5-a1be43dd3335");
   http.addHeader("Content-Type", "application/json");
-  String Authorization = "Bearer " + weatherStationAuth->token;
-  http.addHeader("Authorization", Authorization);
+  JsonObject weatherRecord = doc.createNestedObject("weatherRecord");
+  weatherRecord["pressureFromBMP180"] = weather_data->pressureFromBMP180;
+  weatherRecord["temperatureFromBMP180"] = weather_data->temperatureFromBMP180;
+  weatherRecord["temperatureFromDTH22"] = weather_data->temperatureFromDTH22;
+  weatherRecord["humidityFromDTH22"] = weather_data->humidityFromDTH22;
+  weatherRecord["analogSignalFromRainSensor"] = weather_data->analogSignalFromRainSensor;
   char body[400];
-  doc["pressureFromBMP180"] = weather_data->pressureFromBMP180;
-  doc["temperatureFromBMP180"] = weather_data->temperatureFromBMP180;
-  doc["temperatureFromDTH22"] = weather_data->temperatureFromDTH22;
-  doc["humidityFromDTH22"] = weather_data->humidityFromDTH22;
-  doc["analogSignalFromRainSensor"] = weather_data->analogSignalFromRainSensor;
-  doc["rssi"] = weather_data->rssi;
   serializeJson(doc, body);
   int httpCode = http.POST(body);
   Serial.printf("[HTTP] POST... code: %d\n", httpCode);
   String payload = http.getString();
-
   http.end();
 }
 
@@ -144,46 +107,6 @@ unsigned long previousTime = 0;
 
 void loop()
 {
-  if (e22ttl100.available() > 1)
-  {
-#ifdef ENABLE_RSSI
-    ResponseStructContainer rsc = e22ttl100.receiveMessageRSSI(sizeof(WEATHER_DATA));
-#else
-    ResponseStructContainer rsc = e22ttl100.receiveMessage(sizeof(WEATHER_DATA));
-#endif
-    Serial.println(rsc.status.code);
-    if (rsc.status.code != 1)
-    {
-      Serial.println(rsc.status.getResponseDescription());
-    }
-    else
-    {
-      Serial.println(rsc.status.getResponseDescription());
-      struct WEATHER_DATA weatherDataFromSomeWeatherStation = *(WEATHER_DATA *)rsc.data;
-      Serial.print("username -> ");
-      Serial.println(weatherDataFromSomeWeatherStation.username);
-      Serial.print("password -> ");
-      Serial.println(weatherDataFromSomeWeatherStation.password);
-      Serial.print("pressureFromBMP180 -> ");
-      Serial.println(weatherDataFromSomeWeatherStation.pressureFromBMP180);
-      Serial.print("temperatureFromBMP180 -> ");
-      Serial.println(weatherDataFromSomeWeatherStation.temperatureFromBMP180);
-      Serial.print("temperatureFromDTH22 -> ");
-      Serial.println(weatherDataFromSomeWeatherStation.temperatureFromDTH22);
-      Serial.print("humidityFromDTH22 -> ");
-      Serial.println(weatherDataFromSomeWeatherStation.humidityFromDTH22);
-      Serial.print("analogSignalFromRainSensor -> ");
-      Serial.println(weatherDataFromSomeWeatherStation.analogSignalFromRainSensor);
-
-#ifdef ENABLE_RSSI
-      weatherDataFromSomeWeatherStation.rssi = rsc.rssi;
-      Serial.print("RSSI: ");
-      Serial.println(weatherDataFromSomeWeatherStation.rssi, DEC);
-#endif
-      sendDataToServer(&weatherDataFromSomeWeatherStation, &someWeatherStationAuth);
-    }
-  }
-
   ownWeatherData.pressureFromBMP180 = myBMP.getPressure();
   ownWeatherData.temperatureFromBMP180 = myBMP.getTemperature();
   ownWeatherData.temperatureFromDTH22 = dht22.getTemperature();
@@ -193,9 +116,8 @@ void loop()
   unsigned long currentTime = millis();
   if (currentTime - previousTime >= 2000)
   {
-    sendDataToServer(&ownWeatherData, &ownWeatherStationAuth);
+    sendDataToServer(&ownWeatherData);
     previousTime = currentTime;
   }
 
-  //    Last = millis();
 }
