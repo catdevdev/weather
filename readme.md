@@ -1,6 +1,6 @@
 To start DB remotly run:
-docker-compose --env-file=database-dev.env -f docker-compose.db-dev.yml up --build -d
-docker-compose --env-file=database-dev.env -f docker-compose.db-dev.yml up -d
+docker-compose --env-file=postgres.env -f docker-compose.postgres.yml up --build -d
+docker-compose --env-file=postgres.env -f docker-compose.postgres.yml up --build
 
 Do not forgot create dev.env file
 docker-compose --env-file=postgres.env -f docker-compose.postgres.yml up --build
