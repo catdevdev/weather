@@ -3,7 +3,7 @@ docker-compose --env-file=database-dev.env -f docker-compose.db-dev.yml up --bui
 docker-compose --env-file=database-dev.env -f docker-compose.db-dev.yml up -d
 
 Do not forgot create dev.env file
-docker-compose --env-file=dev.env -f docker-compose.db-dev.yml up --build
+docker-compose --env-file=postgres.env -f docker-compose.postgres.yml up --build
 
 ports:
 9000-client
