@@ -9,7 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 import { Tokens } from './types';
-import { AtGuard, RtGuard } from '@auth/guard';
+import { AccessTokenGuard, RefreshTokenGuard } from '@auth/guard';
 import { GetCurrentUser, GetCurrentUserId, Public } from './decorators';
 
 @Controller('auth')
@@ -19,16 +19,17 @@ export class AuthController {
   @Post('/local/signup')
   @HttpCode(HttpStatus.CREATED)
   singupLocal(@Body() dto: AuthDto): Promise<Tokens> {
-    return this.authService.signupLocal(dto);
+    console.log(dto);
+    return this.authService.signup(dto);
   }
 
   @Post('/local/signin')
   @HttpCode(HttpStatus.OK)
   signinLocal(@Body() dto: AuthDto): Promise<Tokens> {
-    return this.authService.signinLocal(dto);
+    return this.authService.signin(dto);
   }
 
-  @UseGuards(AtGuard)
+  @UseGuards(AccessTokenGuard)
   @Post('/logout')
   @HttpCode(HttpStatus.OK)
   logout(@GetCurrentUserId() userId: number): Promise<boolean> {
@@ -37,7 +38,7 @@ export class AuthController {
   }
 
   @Public()
-  @UseGuards(RtGuard)
+  @UseGuards(RefreshTokenGuard)
   @Post('/refresh')
   @HttpCode(HttpStatus.OK)
   refreshTokens(

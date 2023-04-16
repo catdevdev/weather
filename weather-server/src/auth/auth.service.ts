@@ -18,7 +18,7 @@ export class AuthService {
     private hashingUtils: HashingUtils,
   ) {}
 
-  async signupLocal(dto: AuthDto): Promise<Tokens> {
+  async signup(dto: AuthDto): Promise<Tokens> {
     const alreadyCreatedUser = await this.userService.getUserByEmail(dto.email);
 
     if (alreadyCreatedUser) {
@@ -42,7 +42,7 @@ export class AuthService {
     return tokens;
   }
 
-  async signinLocal(dto: AuthDto): Promise<Tokens> {
+  async signin(dto: AuthDto): Promise<Tokens> {
     const user = await this.userService.getUserByEmail(dto.email);
     const passwordMatches = await argon.verify(user.hash, dto.password);
 

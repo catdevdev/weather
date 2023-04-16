@@ -1,4 +1,5 @@
-import { IsNumber } from 'class-validator';
+import { Prisma } from '@prisma/client';
+import { IsJSON, IsNumber, IsObject } from 'class-validator';
 
 export class CreateWeatherStationDto {
   @IsNumber()
@@ -6,4 +7,7 @@ export class CreateWeatherStationDto {
 
   @IsNumber()
   readonly longitude: number;
+
+  @IsObject()
+  readonly weatherRecordSchema: Prisma.JsonObject;
 }

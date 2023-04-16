@@ -11,6 +11,7 @@ export class WeatherStationService {
     latitude: number,
     longitude: number,
     userId: number,
+    weatherRecordSchema: Prisma.JsonObject,
   ) {
     const api_key = uuidv4();
     const weatherStation = await this.prismaService.weatherStation.create({
@@ -19,6 +20,7 @@ export class WeatherStationService {
         longitude,
         api_key,
         userId,
+        weatherRecordSchema,
       },
     });
     return weatherStation;

@@ -2,14 +2,14 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { WeatherStationService } from './weatherstation.service';
 import { CreateWeatherStationDto } from './weatherstation.dto';
 
-import { AtGuard } from '@auth/guard';
+import { AccessTokenGuard } from '@auth/guard';
 import { GetCurrentUserId } from '@auth/decorators';
 
 @Controller('weatherstations')
 export class WeatherStationController {
   constructor(private readonly weatherStationService: WeatherStationService) {}
 
-  @UseGuards(AtGuard)
+  @UseGuards(AccessTokenGuard)
   @Post('/create-weatherstation')
   createWeatherStation(
     @Body() dto: CreateWeatherStationDto,
@@ -19,6 +19,7 @@ export class WeatherStationController {
       dto.latitude,
       dto.longitude,
       userId,
+      dto.weatherRecordSchema,
     );
   }
 }

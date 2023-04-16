@@ -1,19 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '@prisma/prisma.service';
 
 @Injectable()
 export class WeatherStationRecordService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async createWeatherRecord(
-    apiKey: string,
-    temperature?: number,
-    humidity?: number,
-    pressure?: number,
-    windDirection?: number,
-    windSpeed?: number,
-    precipitation?: number,
-  ) {
+  async createWeatherRecord(apiKey: string, weatherRecord: Prisma.JsonObject) {
     const weatherStation = await this.prismaService.weatherStation.findUnique({
       where: {
         api_key: apiKey,
@@ -26,12 +19,7 @@ export class WeatherStationRecordService {
 
     await this.prismaService.weatherRecord.create({
       data: {
-        temperature,
-        humidity,
-        pressure,
-        windDirection,
-        windSpeed,
-        precipitation,
+        weatherRecord,
         WeatherStation: {
           connect: {
             id: weatherStation.id,

@@ -62,7 +62,6 @@ export class UserService {
   }
 
   async removeRtHash(userId: number): Promise<void> {
-    console.log(userId);
     await this.prisma.user.updateMany({
       where: {
         id: userId,

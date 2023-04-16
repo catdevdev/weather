@@ -7,10 +7,6 @@ import { ConfigService } from '@nestjs/config';
 
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
-import { JwtService } from '@nestjs/jwt';
-import { HashingUtils } from '@auth/helpers/hashing-utils.helper';
-import { AtStrategy, RtStrategy } from '@auth/strategies';
 import { AuthModule } from '@auth/auth.module';
 import { WeatherStationService } from './weatherstation/weatherstation.service';
 import { WeatherStationController } from './weatherstation/weatherstation.controller';
