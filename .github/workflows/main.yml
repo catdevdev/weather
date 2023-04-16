@@ -23,13 +23,11 @@ jobs:
           token: ${{ env.TELEGRAM_BOT_TOKEN }}
           to: ${{ env.TELEGRAM_GROUP_ID }}
           message: |
-            Weather deployment has started 🌧🌪
+            Weather deployment has started 🌧🌪⌛️
 
       - name: Build and run application
         run: |
-          start_time=$(date +%s)
           docker-compose -f docker-compose.prod.yml up --build -d
-          end_time=$(date +%s)
 
       - name: Send message to Telegram group
         uses: appleboy/telegram-action@master
@@ -37,5 +35,5 @@ jobs:
           token: ${{ env.TELEGRAM_BOT_TOKEN }}
           to: ${{ env.TELEGRAM_GROUP_ID }}
           message: |
-            Weather deployment has finished 🌧🌪
+            Weather deployment has finished 🌧🌪☑️
             http://46.175.147.63:9000/
