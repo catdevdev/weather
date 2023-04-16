@@ -1,5 +1,8 @@
 import React from 'react'
 import { AiOutlineDotChart, AiOutlineLineChart } from 'react-icons/ai'
+import { BsFillPersonPlusFill } from 'react-icons/bs'
+import { FiUserPlus } from 'react-icons/fi'
+import { IoLogInOutline } from 'react-icons/io5'
 import { WiNightRainMix } from 'react-icons/wi'
 
 import { SidebarNavLinks } from '@shared/ui/SidebarNavLinks'
@@ -11,14 +14,11 @@ const MainNavigationSidebar = () => {
       <SidebarNavLinks
         navLinks={
           <>
-            <NavLink icon={WiNightRainMix} to={'/'}>
-              Overview
+            <NavLink icon={IoLogInOutline} to={'/signin'}>
+              Sign In
             </NavLink>
-            <NavLink icon={AiOutlineDotChart} to={'/statistics'}>
-              Statistics
-            </NavLink>
-            <NavLink icon={AiOutlineLineChart} to={'/forecast'}>
-              Forecast
+            <NavLink icon={FiUserPlus} to={'/signup'}>
+              Sign Up
             </NavLink>
           </>
         }

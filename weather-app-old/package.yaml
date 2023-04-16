@@ -1,4 +1,4 @@
-name: weather-app
+name: weather-app-old
 version: 0.1.0
 private: true
 scripts:
@@ -9,12 +9,12 @@ scripts:
   start: next start
   lint: next lint
 dependencies:
-  '@ls-lint/ls-lint': ^1.11.2
-  '@next/font': ^13.1.2
-  '@reduxjs/toolkit': ^1.9.1
-  '@types/node': 18.11.18
-  '@types/react': 18.0.26
-  '@types/react-dom': 18.0.10
+  "@ls-lint/ls-lint": ^1.11.2
+  "@next/font": ^13.1.2
+  "@reduxjs/toolkit": ^1.9.1
+  "@types/node": 18.11.18
+  "@types/react": 18.0.26
+  "@types/react-dom": 18.0.10
   eslint: 8.31.0
   eslint-config-next: 13.1.1
   next: 13.1.1

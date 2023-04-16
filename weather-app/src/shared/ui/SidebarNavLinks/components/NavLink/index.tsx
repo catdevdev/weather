@@ -16,13 +16,13 @@ const NavLink = ({ children, icon: Icon, ...props }: NavLinkProps) => {
       {...props}
       children={({ isActive }) =>
         isActive ? (
-          <S.NavLinkWrapper>
-            <Icon color="black" />
+          <S.NavLinkWrapper isActive={isActive}>
+            <Icon size={26} color="black" />
             {children}
           </S.NavLinkWrapper>
         ) : (
-          <S.NavLinkWrapper>
-            <Icon color="gray" />
+          <S.NavLinkWrapper isActive={isActive}>
+            <Icon size={26} color="#00000080" />
             {children}
           </S.NavLinkWrapper>
         )
