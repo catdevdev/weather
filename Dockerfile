@@ -1,6 +1,9 @@
 FROM node:lts
 FROM python:3.9-slim-buster
 
+RUN npm install -g yarn
+
+
 WORKDIR /app
 
 
