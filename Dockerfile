@@ -16,8 +16,8 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn build
 RUN prisma-migrate-node
 RUN prisma-migrate-python
+RUN yarn build
 
 CMD ["yarn", "start"]
