@@ -3,12 +3,7 @@ FROM node:lts
 
 RUN apt-get update && apt-get install -y python3 python3-pip
 
-RUN npm install -g yarn
-
-
 WORKDIR /app
-
-
 
 RUN mkdir -p /app/weather-app
 RUN mkdir -p /app/weather-server
