@@ -35,3 +35,4 @@ RUN cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name in
 RUN yarn build
 
 CMD ["yarn", "start"]
+CMD ["python3", "/app/weather-algo/main.py"]
