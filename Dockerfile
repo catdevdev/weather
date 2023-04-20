@@ -3,6 +3,7 @@ FROM node:16
 WORKDIR /app
 
 
+
 RUN mkdir -p /app/weather-app
 RUN mkdir -p /app/weather-server
 RUN mkdir -p /app/weather-algo
