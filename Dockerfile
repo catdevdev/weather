@@ -13,7 +13,7 @@ RUN mkdir -p /app/prisma
 ADD package.json yarn.lock ./
 ADD weather-app/package.json ./weather-app
 ADD weather-server/package.json ./weather-server
-ADD weather-algo/requirements ./weather-algo
+ADD weather-algo/requirements.txt ./weather-algo
 ADD prisma ./prisma
 
 RUN yarn install
