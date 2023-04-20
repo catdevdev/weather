@@ -27,7 +27,7 @@ COPY . .
 
 
 RUN yarn prisma-migrate-node
-RUN yarn prisma-migrate-python
+# RUN yarn prisma-migrate-python
 RUN yarn build
 
 CMD ["yarn", "start"]
