@@ -1,11 +1,12 @@
 FROM node:16
+FROM python:3.9-slim-buster
 
 WORKDIR /app
 
 
 
 RUN mkdir -p /app/weather-app
-RUN mkdir -p /app/weather-server
+RUN mkdirs -p /app/weather-server
 RUN mkdir -p /app/weather-algo
 RUN mkdir -p /app/prisma
 
