@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    
     "dev": "yarn nx run-many --target=dev --all",
     "build": "yarn nx run-many --target=build --all",
     "start": "yarn nx run-many --target=start --all",
