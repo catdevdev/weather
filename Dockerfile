@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:lts
 FROM python:3.9-slim-buster
 
 WORKDIR /app
