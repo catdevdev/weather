@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "yarn nx run-many --target=dev --all",
     "build": "yarn nx run-many --target=build --all",
-    "start": "yarn nx run-many --target=start --all"
+    "start": "yarn nx run-many --target=start --all",
+    "prisma-migrate-node": "cd ./prisma && ./update_schema.sh node && npx prisma migrate dev --name init",
+    "prisma-migrate-python": "cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name init"
   },
   "private": true,
   "workspaces": [

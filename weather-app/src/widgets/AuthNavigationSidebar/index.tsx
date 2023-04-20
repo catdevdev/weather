@@ -5,8 +5,8 @@ import { FiUserPlus } from 'react-icons/fi'
 import { IoLogInOutline } from 'react-icons/io5'
 import { WiNightRainMix } from 'react-icons/wi'
 
-import { SidebarNavLinks } from '@shared/ui/SidebarNavLinks'
 import { NavLink } from '@shared/ui/SidebarNavLinks'
+import { SidebarNavLinks } from '@shared/ui/SidebarNavLinks'
 
 const MainNavigationSidebar = () => {
   return (

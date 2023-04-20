@@ -1,0 +1,46 @@
+generator py {
+  provider             = "prisma-client-py"
+  recursive_type_depth = -1
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email      String  @unique
+  username   String? @unique
+  firstname  String?
+  lastname   String?
+  avatarUrl  String?
+  webpageUrl String?
+
+  hash     String
+  hashedRt String?
+
+  weatherStations WeatherStation[]
+}
+
+model WeatherStation {
+  id                  String          @id @default(uuid())
+  latitude            Float
+  longitude           Float
+  api_key             String          @unique
+  User                User?           @relation(fields: [userId], references: [id])
+  userId              Int?
+  weatherRecordSchema Json
+  weatherRecords      WeatherRecord[]
+}
+
+model WeatherRecord {
+  id               Int             @id @default(autoincrement())
+  createAt         DateTime        @default(now())
+  weatherRecord    Json
+  WeatherStation   WeatherStation? @relation(fields: [weatherStationId], references: [id])
+  weatherStationId String?
+}

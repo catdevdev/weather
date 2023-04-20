@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router'
 import { Link } from 'react-router-dom'
 
+import AuthNavigationSidebar from '@widgets/AuthNavigationSidebar'
 import Layout from '@widgets/Layout'
 import MainNavigationSidebar from '@widgets/MainNavigationSidebar'
 
 import Forecast from './Forecast'
 import Overview from './Overview'
 import Statistics from './Statistics'
-import AuthNavigationSidebar from '@widgets/AuthNavigationSidebar'
 
 export const Routing = () => {
   return (
