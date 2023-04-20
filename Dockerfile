@@ -5,6 +5,7 @@ WORKDIR /app
 
 RUN mkdir -p /app/weather-app
 RUN mkdir -p /app/weather-server
+RUN mkdir -p /app/weather-algo
 RUN mkdir -p /app/prisma
 
 ADD package.json yarn.lock ./
@@ -13,6 +14,7 @@ ADD weather-server/package.json ./weather-server
 ADD prisma ./prisma
 
 RUN yarn install
+RUN yarn pip
 
 COPY . .
 
