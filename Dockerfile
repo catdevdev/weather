@@ -28,6 +28,7 @@ COPY . .
 
 RUN yarn prisma-migrate-node
 # RUN yarn prisma-migrate-python
+RUN cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name init
 RUN yarn build
 
 CMD ["yarn", "start"]
