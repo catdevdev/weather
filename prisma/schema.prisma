@@ -1,9 +1,11 @@
 generator js {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // url      = env("DATABASE_URL")
+  url      = "postgresql://weather:fugewjrlwerjweldoifjv4j829v82398h2f9h298d9j2d92j3d889dj28djdovi1221@46.175.147.63:9011/weather?schema=public"
 }
 
 model User {
