@@ -6,7 +6,7 @@ WORKDIR /app
 
 
 RUN mkdir -p /app/weather-app
-RUN mkdirs -p /app/weather-server
+RUN mkdir -p /app/weather-server
 RUN mkdir -p /app/weather-algo
 RUN mkdir -p /app/prisma
 
