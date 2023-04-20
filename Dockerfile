@@ -18,8 +18,9 @@ ADD prisma ./prisma
 
 RUN yarn install
 
-SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
-RUN pip install --no-cache-dir -r /app/weather-algo/requirements.txt
+# SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
+RUN pip3 install -r weather-algo/requirements.txt
+# RUN pip install --no-cache-dir -r /app/weather-algo/requirements.txt
 
 COPY . .
 
