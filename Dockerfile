@@ -28,7 +28,6 @@ RUN apt install python-is-python3
 COPY . .
 
 
-
 # RUN yarn prisma-migrate-node
 RUN cd ./prisma && ./update_schema.sh node && npx prisma migrate dev --name init
 # RUN yarn prisma-migrate-python
