@@ -21,7 +21,7 @@ RUN yarn install
 
 # SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
 RUN pip3 install -r weather-algo/requirements.txt
-RUN pip3 install prisma
+RUN apt install python-is-python3
 # RUN pip install --no-cache-dir -r /app/weather-algo/requirements.txt
 
 COPY . .
@@ -35,4 +35,4 @@ RUN cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name in
 RUN yarn build
 
 CMD ["yarn", "start"]
-CMD ["python3", "/app/weather-algo/main.py"]
+# CMD ["python3", "/app/weather-algo/main.py"]
