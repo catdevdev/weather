@@ -1,24 +1,29 @@
-generator js {
-  provider = "prisma-client-js"
+generator py {
+  provider             = "prisma-client-py"
+  recursive_type_depth = -1
 }
-
 datasource db {
   provider = "postgresql"
+  // url      = env("DATABASE_URL")
   url      = "postgresql://weather:fugewjrlwerjweldoifjv4j829v82398h2f9h298d9j2d92j3d889dj28djdovi1221@46.175.147.63:9011/weather?schema=public"
 }
 
 model User {
-  id              Int              @id @default(autoincrement())
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  email           String           @unique
-  username        String?          @unique
-  firstname       String?
-  lastname        String?
-  avatarUrl       String?
-  webpageUrl      String?
-  hash            String
-  hashedRt        String?
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email      String  @unique
+  username   String? @unique
+  firstname  String?
+  lastname   String?
+  avatarUrl  String?
+  webpageUrl String?
+
+  hash     String
+  hashedRt String?
+
   weatherStations WeatherStation[]
 }
 
@@ -26,17 +31,17 @@ model WeatherStation {
   id                  String          @id @default(uuid())
   latitude            Float
   longitude           Float
-  userId              Int?
   api_key             String          @unique
+  User                User?           @relation(fields: [userId], references: [id])
+  userId              Int?
   weatherRecordSchema Json
   weatherRecords      WeatherRecord[]
-  User                User?           @relation(fields: [userId], references: [id])
 }
 
 model WeatherRecord {
   id               Int             @id @default(autoincrement())
-  weatherStationId String?
-  weatherRecord    Json
   createdAt        DateTime        @default(now())
+  weatherRecord    Json
   WeatherStation   WeatherStation? @relation(fields: [weatherStationId], references: [id])
+  weatherStationId String?
 }
