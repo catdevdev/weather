@@ -1,10 +1,13 @@
 import { GetCurrentUserId } from '@auth/decorators';
 import { AccessTokenGuard } from '@auth/guard';
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { Param } from '@nestjs/common';
 
 import { WeatherStationRecordService } from './weatherstation-record.service';
-import { CreateWeatherRecordDto } from './weatherstation-record.dto';
+import {
+  CreateWeatherRecordDto,
+  GetWeatherRecordsDto,
+} from './weatherstation-record.dto';
 
 @Controller('weatherstation')
 export class WeatherStationRecordController {
@@ -20,6 +23,15 @@ export class WeatherStationRecordController {
     return this.weatherStationService.createWeatherRecord(
       apiKey,
       dto.weatherRecord,
+    );
+  }
+
+  @Get('/get-weather-records')
+  getWeatherRecords(@Body() dto: GetWeatherRecordsDto) {
+    return this.weatherStationService.getWeatherRecords(
+      dto.weatherStationId,
+      dto.gte,
+      dto.lte,
     );
   }
 }

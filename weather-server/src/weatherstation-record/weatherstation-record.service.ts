@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '@prisma/prisma.service';
+import { getWeatherRecords } from './algo-api/get-weather-records';
 
 @Injectable()
 export class WeatherStationRecordService {
@@ -27,5 +28,15 @@ export class WeatherStationRecordService {
         },
       },
     });
+  }
+
+  async getWeatherRecords(weatherStationId: string, gte: string, lte: string) {
+    const { data: weatherRecords } = await getWeatherRecords(
+      weatherStationId,
+      gte,
+      lte,
+    );
+
+    return weatherRecords;
   }
 }

@@ -12,6 +12,7 @@ import { WeatherStationService } from './weatherstation/weatherstation.service';
 import { WeatherStationController } from './weatherstation/weatherstation.controller';
 import { WeatherStationRecordService } from './weatherstation-record/weatherstation-record.service';
 import { WeatherStationRecordController } from './weatherstation-record/weatherstation-record.controller';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { WeatherStationRecordController } from './weatherstation-record/weathers
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       playground: false,
     }),
+    ConfigModule.forRoot(),
     UserModule,
     AuthModule,
     PrismaModule,

@@ -1,18 +1,53 @@
+import datetime
 from fastapi import APIRouter
 from src.prisma import prisma
+from pydantic import BaseModel
 
 router = APIRouter()
 
 
+class TimeFrame(BaseModel):
+    gte: datetime.datetime
+    lte: datetime.datetime
+
+
 @router.get("/weather-records")
-async def get_weather_records():
+async def get_weather_records(timeFrame: TimeFrame):
     weather_records = await prisma.weatherrecord.find_many(
         where={
             "createdAt": {
-                "lte": "2023-03-22T00:00:00+00:00",
-                "gte": "2023-03-22T00:00:00+00:00",
+                "gte": timeFrame.gte,
+                "lte": timeFrame.lte,
             }
+        },
+        order={
+            "createdAt": "asc"
         }
     )
-    # print(weather_records)
-    return {"weather_records": weather_records}
+
+    if len(weather_records) == 0:
+        return {"weather_records": []}
+
+    # initialize variables
+    last_timestamp = weather_records[0].createdAt
+    new_list = [weather_records[0]]
+    result_list = []
+
+    # iterate through the weather records
+    for i in range(1, len(weather_records)):
+        current_timestamp = weather_records[i].createdAt
+        if (current_timestamp - last_timestamp).total_seconds() > 5:
+            # start a new list if the time difference is more than 5 seconds
+            result_list.append(new_list)
+            new_list = [weather_records[i]]
+        else:
+            new_list.append(weather_records[i])
+        last_timestamp = current_timestamp
+
+    # add the final list to the result list
+    result_list.append(new_list)
+
+    return {"weather_records": result_list}
+
+    # "gte": "2010-03-22T00:00:00+00:00",
+    # "lte": "2030-03-22T00:00:00+00:00",
