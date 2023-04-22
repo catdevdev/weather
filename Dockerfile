@@ -13,11 +13,12 @@ RUN mkdir -p /app/prisma
 ADD package.json yarn.lock ./
 ADD weather-app/package.json ./weather-app
 ADD weather-server/package.json ./weather-server
-ADD weather-algo/requirements.txt ./weather-algo
 ADD weather-algo/package.json ./weather-algo
 ADD prisma ./prisma
 
 RUN yarn install
+
+ADD weather-algo/requirements.txt ./weather-algo
 
 # SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
 RUN pip3 install -r weather-algo/requirements.txt
