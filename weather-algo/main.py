@@ -20,7 +20,7 @@ async def shutdown():
 
 @app.get("/")
 async def read_root():
-    return {"version": '0.0.0'}
+    return {"version": '0.0.1'}
 
 
 if __name__ == "__main__":
