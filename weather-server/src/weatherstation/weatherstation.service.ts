@@ -7,6 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 export class WeatherStationService {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async getWeatherStations() {
+    const weatherStations = await this.prismaService.weatherStation.findMany();
+
+    return weatherStations;
+  }
+
   async createWeatherStation(
     latitude: number,
     longitude: number,

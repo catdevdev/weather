@@ -2,7 +2,7 @@
     "name": "my-project",
     "version": "1.0.0",
     "scripts": {
-      "dev": "source venv/bin/activate && python main.py",
+      "dev": "uvicorn main:app --reload --port 9002",
       "start": "python main.py"
     }
   }

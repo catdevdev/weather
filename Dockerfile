@@ -14,7 +14,6 @@ ADD package.json yarn.lock ./
 ADD weather-app/package.json ./weather-app
 ADD weather-server/package.json ./weather-server
 ADD weather-algo/package.json ./weather-algo
-ADD prisma ./prisma
 
 RUN yarn install
 
