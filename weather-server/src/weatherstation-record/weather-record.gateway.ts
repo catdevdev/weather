@@ -18,6 +18,7 @@ export class WeatherRecordGateway {
 
   sendLastWeatherRecord(weatherRecord: Prisma.JsonObject) {
     console.log('123');
+
     this.server.emit('send_last_weather_record', weatherRecord);
   }
 }
