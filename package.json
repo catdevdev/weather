@@ -9,7 +9,8 @@
     "start": "yarn nx run-many --target=start --all",
     "pip": "cd weather-algo && source venv/bin/activate && pip install -r requirements.txt",
     "prisma-migrate-node": "cd ./prisma && ./update_schema.sh node && npx prisma migrate dev --name init",
-    "prisma-migrate-python": "cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name init"
+    "prisma-migrate-python": "cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name init",
+    "prisma-migrate": "yarn prisma-migrate-node && yarn prisma-migrate-python"
   },
   "private": true,
   "workspaces": [

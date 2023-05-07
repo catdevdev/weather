@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 
-import { getWeatherstations } from '../api/fetchWeatherStations'
+import { getWeatherstations } from '../api/getWeatherstations'
 import { WeatherStationState } from '../models'
 
 // import { createRocket } from '../api/createRocket/createRocket'

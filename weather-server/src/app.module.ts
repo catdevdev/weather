@@ -13,6 +13,8 @@ import { WeatherStationController } from './weatherstation/weatherstation.contro
 import { WeatherStationRecordService } from './weatherstation-record/weatherstation-record.service';
 import { WeatherStationRecordController } from './weatherstation-record/weatherstation-record.controller';
 import { ConfigModule } from '@nestjs/config';
+import { AppGateway } from './app/app.gateway';
+import { WeatherRecordGateway } from './weatherstation-record/weather-record.gateway';
 
 @Module({
   imports: [
@@ -34,6 +36,11 @@ import { ConfigModule } from '@nestjs/config';
     WeatherStationController,
     WeatherStationRecordController,
   ],
-  providers: [WeatherStationService, WeatherStationRecordService],
+  providers: [
+    WeatherStationService,
+    WeatherStationRecordService,
+    WeatherRecordGateway,
+    AppGateway,
+  ],
 })
 export class AppModule {}

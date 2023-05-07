@@ -14,10 +14,6 @@ const NavLink = ({
 }) => {
   const { pathname } = useRouter();
 
-  useEffect(() => {
-    console.log(pathname);
-  }, [pathname]);
-
   return (
     <Link
       className={`${styles.container} ${pathname === href ? "active" : ""}`}

@@ -6,7 +6,7 @@ import { WeatherStation } from '../models'
 
 // import { CreateArgument, CreateRocketResponse } from './types'
 
-export const getWeatherstations = createAsyncThunk(
+const getWeatherstations = createAsyncThunk(
   'weatherStations/getWeatherStations',
   async (): Promise<WeatherStation[]> => {
     const response = await axios.get<WeatherStation[]>(
@@ -16,3 +16,5 @@ export const getWeatherstations = createAsyncThunk(
     return response.data
   },
 )
+
+export { getWeatherstations }

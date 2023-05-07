@@ -19,7 +19,6 @@ export class AuthController {
   @Post('/local/signup')
   @HttpCode(HttpStatus.CREATED)
   singupLocal(@Body() dto: AuthDto): Promise<Tokens> {
-    console.log(dto);
     return this.authService.signup(dto);
   }
 
@@ -33,7 +32,6 @@ export class AuthController {
   @Post('/logout')
   @HttpCode(HttpStatus.OK)
   logout(@GetCurrentUserId() userId: number): Promise<boolean> {
-    console.log(userId);
     return this.authService.logout(userId);
   }
 

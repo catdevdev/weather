@@ -31,9 +31,6 @@ export const Routing = () => {
         <Route path="/" element={<Overview />}>
           <Route path="/modal" element={<WeatherstationsMap />} />
         </Route>
-        {/* <Routes>
-          <Route path="/modal" element={<WeatherstationsMap />} />
-        </Routes> */}
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/forecast" element={<Forecast />} />
       </Route>

@@ -7,10 +7,14 @@ import {
 } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
-// import { rocketsSlice } from '@/entities/Rockets/slices/rocketsSlice'
+import { groupedAverageWeatherRecordsSlice } from '@entities/WeatherRecord/slices/groupedAverageWeatherRecordsSlice'
+import { weatherRecordsSlice } from '@entities/WeatherRecord/slices/weatherRecordsSlice'
+import { weatherStationsSlice } from '@entities/WeatherStation'
 
 const rootReducer = combineReducers({
-  rocketsState: rocketsSlice.reducer,
+  weatherStations: weatherStationsSlice.reducer,
+  weatherRecords: weatherRecordsSlice.reducer,
+  groupedAverageWeatherRecordsSlice: groupedAverageWeatherRecordsSlice.reducer,
 })
 
 export const setupStore = () => {
