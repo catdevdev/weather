@@ -33,5 +33,5 @@ RUN cd ./prisma && ./update_schema.sh node && npx prisma migrate dev --name init
 RUN cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name init
 RUN yarn build
 
-CMD yarn start ; python /app/weather-algo/main.py
+CMD yarn start; python /app/weather-algo/main.py
 
