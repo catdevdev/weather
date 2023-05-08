@@ -12,6 +12,7 @@ import { SeriesPoint } from '@visx/shape/lib/types'
 import { useTooltip, useTooltipInPortal, defaultStyles } from '@visx/tooltip'
 import { timeParse, timeFormat } from 'd3-time-format'
 import React from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { useAppSelector } from '@shared/hook/redux'
 
@@ -44,7 +45,21 @@ export default function BarChart({
   margin = defaultMargin,
   dataSet,
 }: Props) {
-  const formatTime = timeFormat('%H:%M')
+  const [searchParams] = useSearchParams()
+
+  const formatTime = (timestamp: Date) => {
+    switch (searchParams.get('groupBy')) {
+      case '24H':
+        return timeFormat('%B-%d')(timestamp)
+      case '12H':
+        return timeFormat('%B-%d')(timestamp)
+      case '1H':
+        return timeFormat('%H:%M')(timestamp)
+      case '30T':
+        return timeFormat('%H:%M')(timestamp)
+    }
+  }
+  // const formatTime = timeFormat('%H:%M')
 
   const dateScale = scaleBand<string>({
     domain: dataSet.map(data => {

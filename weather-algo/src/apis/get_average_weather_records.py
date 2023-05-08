@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from enum import Enum
 from fastapi import APIRouter
 from src.prisma import prisma
 from pydantic import BaseModel
@@ -9,9 +10,18 @@ from statistics import mean
 router = APIRouter()
 
 
+class GroupByEnum(str, Enum):
+    H24 = '24H'
+    H12 = '12H'
+    H1 = '1H'
+    M30 = '30T'
+
+
 class Args(BaseModel):
     gte: datetime
     lte: datetime
+    weatherStationId: str
+    groupBy: GroupByEnum
 
 
 @router.get("/get-average-weather-records")
@@ -21,7 +31,8 @@ async def get_average_weather_records(args: Args):
             "createdAt": {
                 "gte": args.gte,
                 "lte": args.lte,
-            }
+            },
+            'weatherStationId': args.weatherStationId
         },
         order={
             "createdAt": "asc"
@@ -37,7 +48,7 @@ async def get_average_weather_records(args: Args):
 
     df.set_index(pd.DatetimeIndex(df['createdAt']), inplace=True)
 
-    df_hourly_avg = pd.DataFrame.from_records(df.groupby(pd.Grouper(freq='H'))[
+    df_hourly_avg = pd.DataFrame.from_records(df.groupby(pd.Grouper(freq=args.groupBy))[
                                               'weatherRecord'].apply(list).apply(lambda x: pd.DataFrame(x).mean(axis=0)))
 
     return {'get_average_weather_records': df_hourly_avg}

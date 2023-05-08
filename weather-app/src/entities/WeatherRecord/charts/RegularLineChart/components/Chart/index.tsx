@@ -63,18 +63,13 @@ const Chart = ({
   })
 
   const timeScale = scaleTime<number>({
-    domain: [
-      new Date(dateFrom).valueOf(),
-      new Date(dateTo).valueOf(),
-      // Math.min(...flatDataSet.map(set => new Date(set.createdAt).valueOf())),
-      // Math.max(...flatDataSet.map(set => new Date(set.createdAt).valueOf())),
-    ],
+    domain: [new Date(dateFrom).valueOf(), new Date(dateTo).valueOf()],
   })
 
   const temperatureScale = scaleLinear<number>({
     domain: [
-      Math.min(...flatDataSet.map(set => set.value)),
-      Math.max(...flatDataSet.map(set => set.value)),
+      Math.min(...flatDataSet.map(set => set.value)) - 10,
+      Math.max(...flatDataSet.map(set => set.value)) + 10,
     ],
     nice: true,
   })

@@ -3,6 +3,7 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useParams } from 'react-router-dom'
 import { PulseLoader } from 'react-spinners'
+import { Button } from 'rsuite'
 
 import { useAppDispatch, useAppSelector } from '@shared/hook/redux'
 import ContextBar from '@shared/ui/ContextBar'
@@ -15,8 +16,11 @@ import BarChart from '@entities/WeatherRecord/charts/BarChart'
 import ContextTimeFrame from '@features/ContextTimeFrame'
 import { WeatherstationTriggerStatus } from '@features/MapWeatherstationSelect'
 
-import 'twin.macro'
 import Layout from '@widgets/Layout'
+
+import 'twin.macro'
+import ContextGroupBy from '@features/ContextGroupBy'
+import ContextApplyFiltersStatistics from '@features/ContextApplyFiltersStatistics'
 
 const Statistics = () => {
   const dispatch = useAppDispatch()
@@ -29,6 +33,7 @@ const Statistics = () => {
         weatherStationId: weatherstation_id || '',
         gte: '2023-04-30T21:10:23.055000+00:00',
         lte: '2023-05-02T21:59:17.530000+00:00',
+        groupBy: '1H',
       }),
     )
   }, [])
@@ -41,17 +46,12 @@ const Statistics = () => {
     state => state.groupedAverageWeatherRecordsSlice.isLoading,
   )
 
-  // const newArray = groupedAverageWeatherRecords.pressureFromBMP180.map(obj => {
-  //   const timestamp = Object.keys(obj)[0]
-  //   const value = obj[timestamp]
-  //   return { timestamp, value }
-  // })
-
-  // const groupedWeatherRecords = Object.entries(
-  //   groupedAverageWeatherRecords.pressureFromBMP180 || {},
-  // )
-
   const convert = (dataFromBE: { [s: string]: number }) => {
+    console.log(dataFromBE)
+
+    if (!dataFromBE || !Object.entries(dataFromBE).length) {
+      return []
+    }
     const output = Object.entries(dataFromBE).map(([timestamp, value]) => ({
       timestamp,
       value,
@@ -59,17 +59,13 @@ const Statistics = () => {
     return output
   }
 
-  // if (!groupedAverageWeatherRecords?.pressureFromBMP180) {
-  //   return 'loading'
-  // }
-
-  // groupedAverageWeatherRecords.
-
   return (
     <>
       <PageHeader>Statistics</PageHeader>
       <ContextBar>
-        <ContextTimeFrame></ContextTimeFrame>
+        <ContextGroupBy />
+        <ContextTimeFrame />
+        <ContextApplyFiltersStatistics />
       </ContextBar>
 
       {isLoading && <Loader />}

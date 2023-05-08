@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 export const getAverageWeatherRecords = (
-  weatherStationId: string,
   gte: string,
   lte: string,
+  weatherStationId: string,
+  groupBy: string,
 ) => {
   return axios.get(
     'http://46.175.147.63:9002/api/get-average-weather-records',
@@ -12,6 +13,8 @@ export const getAverageWeatherRecords = (
       data: {
         gte,
         lte,
+        weatherStationId,
+        groupBy,
       },
     },
   );

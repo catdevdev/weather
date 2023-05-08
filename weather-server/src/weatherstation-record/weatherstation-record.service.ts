@@ -51,14 +51,16 @@ export class WeatherStationRecordService {
   }
 
   async getAverageWeatherRecords(
-    weatherStationId: string,
     gte: string,
     lte: string,
+    weatherStationId: string,
+    groupBy: string,
   ) {
     const { data: averageWeatherRecords } = await getAverageWeatherRecords(
-      weatherStationId,
       gte,
       lte,
+      weatherStationId,
+      groupBy,
     );
 
     return averageWeatherRecords;

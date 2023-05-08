@@ -6,6 +6,7 @@ import { Param } from '@nestjs/common';
 import { WeatherStationRecordService } from './weatherstation-record.service';
 import {
   CreateWeatherRecordDto,
+  GetGroupedWeatherRecordsDto,
   GetWeatherRecordsDto,
 } from './weatherstation-record.dto';
 
@@ -43,11 +44,12 @@ export class WeatherStationRecordController {
   }
 
   @Get('/get-average-weather-records')
-  getAverageWeatherRecords(@Query() dto: GetWeatherRecordsDto) {
+  getAverageWeatherRecords(@Query() dto: GetGroupedWeatherRecordsDto) {
     return this.weatherStationService.getAverageWeatherRecords(
-      dto.weatherStationId,
       dto.gte,
       dto.lte,
+      dto.weatherStationId,
+      dto.groupBy,
     );
   }
 }

@@ -3,15 +3,14 @@ import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { CustomProvider } from 'rsuite'
+import 'rsuite/dist/rsuite-no-reset.min.css'
 
 import GlobalStyles from '@shared/styles/GlobalStyles'
 
 import { Routing } from '@pages/index'
 
 import 'leaflet/dist/leaflet.css'
-import 'react-loading-skeleton/dist/skeleton.css'
-import 'react-datepicker/dist/react-datepicker.css'
-import 'rsuite/dist/rsuite-no-reset.min.css'
+import '@kirklin/reset-css/kirklin.css'
 
 import { setupStore } from './redux'
 

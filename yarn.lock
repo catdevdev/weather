@@ -1504,6 +1504,11 @@
   resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz#08d6c5e20cf7e4cc02fd181c4b0c225cd31dbb60"
   integrity sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==
 
+"@kirklin/reset-css@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@kirklin/reset-css/-/reset-css-0.0.3.tgz#87f3dbe821a78a5590de40469d13fd8fa3d4355e"
+  integrity sha512-EUfxCc0U8iIn4hwhtsOha6uYKul839pyol4Yt5FJtLT8BH/F9MLMkik6KkKHhvInk8nVu4flSsFBGn/OZuu74g==
+
 "@lukeed/csprng@^1.0.0":
   version "1.0.1"
   resolved "https://registry.npmjs.org/@lukeed/csprng/-/csprng-1.0.1.tgz"

@@ -14,12 +14,26 @@ export class CreateWeatherRecordDto {
 }
 
 export class GetWeatherRecordsDto {
-  @IsString()
-  readonly weatherStationId: string;
-
   @IsDateString()
   readonly gte: string;
 
   @IsDateString()
   readonly lte: string;
+
+  @IsString()
+  readonly weatherStationId: string;
+}
+
+export class GetGroupedWeatherRecordsDto {
+  @IsDateString()
+  readonly gte: string;
+
+  @IsDateString()
+  readonly lte: string;
+
+  @IsString()
+  readonly weatherStationId: string;
+
+  @IsString()
+  readonly groupBy: string;
 }
