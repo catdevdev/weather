@@ -40,7 +40,6 @@ const Overview = () => {
     socket.emit('room', 'b92047e5-b481-4374-9fde-12eb295bf373')
     socket.on('send_last_weather_record', function (data) {
       console.log(data)
-      alert(data)
     })
   }, [])
 
