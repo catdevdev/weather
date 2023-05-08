@@ -23,10 +23,11 @@ const weatherRecordsSlice = createSlice({
       state,
       action: PayloadAction<any>, // any because WeatherRecord can container random weather parameters
     ) => {
-      if (state.weatherRecords.length)
+      if (state.weatherRecords.length) {
         state.weatherRecords[state.weatherRecords.length - 1].push(
           action.payload,
         )
+      }
     },
   },
   extraReducers: builder => {

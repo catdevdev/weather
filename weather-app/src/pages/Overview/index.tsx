@@ -8,6 +8,7 @@ import { io } from 'socket.io-client'
 
 import { useAppDispatch, useAppSelector } from '@shared/hook/redux'
 import ContextBar from '@shared/ui/ContextBar'
+import Loader from '@shared/ui/Loader'
 import PageHeader from '@shared/ui/PageHeader'
 
 import { getWeatherRecords } from '@entities/WeatherRecord/api'
@@ -75,9 +76,9 @@ const Overview = () => {
         <ContextOnline></ContextOnline>
         <ContextTimeFrame></ContextTimeFrame>
       </ContextBar>
-      {isLoading && <PulseLoader color="#999999" />}
+      {isLoading && <Loader />}
       {!isLoading && (
-        <div tw="flex w-full flex-wrap gap-5">
+        <div tw="grid grid-cols-2 w-full flex-wrap gap-5">
           <RegularLineChart
             valueName="temperature"
             currentValue={123}

@@ -114,7 +114,7 @@ void loop()
   ownWeatherData.analogSignalFromRainSensor = analogRead(rainSensorGPIOPin);
 
   unsigned long currentTime = millis();
-  if (currentTime - previousTime >= 2000)
+  if (currentTime - previousTime >= 1000)
   {
     sendDataToServer(&ownWeatherData);
     previousTime = currentTime;

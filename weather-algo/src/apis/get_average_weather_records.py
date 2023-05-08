@@ -9,18 +9,18 @@ from statistics import mean
 router = APIRouter()
 
 
-class TimeFrame(BaseModel):
+class Args(BaseModel):
     gte: datetime
     lte: datetime
 
 
 @router.get("/get-average-weather-records")
-async def get_average_weather_records(timeFrame: TimeFrame):
+async def get_average_weather_records(args: Args):
     weather_records = await prisma.weatherrecord.find_many(
         where={
             "createdAt": {
-                "gte": timeFrame.gte,
-                "lte": timeFrame.lte,
+                "gte": args.gte,
+                "lte": args.lte,
             }
         },
         order={

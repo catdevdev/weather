@@ -5,10 +5,14 @@ import { useParams } from 'react-router-dom'
 import { PulseLoader } from 'react-spinners'
 
 import { useAppDispatch, useAppSelector } from '@shared/hook/redux'
+import ContextBar from '@shared/ui/ContextBar'
+import Loader from '@shared/ui/Loader'
+import PageHeader from '@shared/ui/PageHeader'
 
 import { getGroupedAverageWeatherRecords } from '@entities/WeatherRecord/api/getAverageWeatherRecords'
 import BarChart from '@entities/WeatherRecord/charts/BarChart'
 
+import ContextTimeFrame from '@features/ContextTimeFrame'
 import { WeatherstationTriggerStatus } from '@features/MapWeatherstationSelect'
 
 import 'twin.macro'
@@ -62,27 +66,36 @@ const Statistics = () => {
   // groupedAverageWeatherRecords.
 
   return (
-    <div tw="flex w-full flex-wrap gap-5">
-      {isLoading && <PulseLoader color="#999999" />}
-      {!isLoading && (
-        <>
-          <BarChart
-            dataSet={convert(groupedAverageWeatherRecords.pressureFromBMP180)}
-          />
-          <BarChart
-            dataSet={convert(groupedAverageWeatherRecords.humidityFromDTH22)}
-          />
-          <BarChart
-            dataSet={convert(
-              groupedAverageWeatherRecords.temperatureFromBMP180,
-            )}
-          />
-          <BarChart
-            dataSet={convert(groupedAverageWeatherRecords.temperatureFromDTH22)}
-          />
-        </>
-      )}
-    </div>
+    <>
+      <PageHeader>Statistics</PageHeader>
+      <ContextBar>
+        <ContextTimeFrame></ContextTimeFrame>
+      </ContextBar>
+
+      {isLoading && <Loader />}
+      <div tw="flex w-full flex-wrap gap-5">
+        {!isLoading && (
+          <>
+            <BarChart
+              dataSet={convert(groupedAverageWeatherRecords.pressureFromBMP180)}
+            />
+            <BarChart
+              dataSet={convert(groupedAverageWeatherRecords.humidityFromDTH22)}
+            />
+            <BarChart
+              dataSet={convert(
+                groupedAverageWeatherRecords.temperatureFromBMP180,
+              )}
+            />
+            <BarChart
+              dataSet={convert(
+                groupedAverageWeatherRecords.temperatureFromDTH22,
+              )}
+            />
+          </>
+        )}
+      </div>
+    </>
   )
 }
 

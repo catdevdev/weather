@@ -1,5 +1,6 @@
 import { AxisLeft, AxisBottom } from '@visx/axis'
 import { curveBasis } from '@visx/curve'
+import { LinearGradient } from '@visx/gradient'
 import { GridRows, GridColumns } from '@visx/grid'
 import { Group } from '@visx/group'
 import cityTemperature, {
@@ -8,7 +9,7 @@ import cityTemperature, {
 import { withParentSize } from '@visx/responsive'
 import { ParentSize } from '@visx/responsive'
 import { scaleTime, scaleLinear } from '@visx/scale'
-import { LinePath } from '@visx/shape'
+import { AreaClosed, LinePath } from '@visx/shape'
 import { Threshold } from '@visx/threshold'
 import React from 'react'
 
@@ -116,18 +117,41 @@ const Chart = ({
         </text>
         {dataSet.map(set => {
           return (
-            <LinePath
-              data={set}
-              curve={curveBasis}
-              x={d => {
-                return timeScale(Date.parse(d.createdAt).valueOf())
-              }}
-              y={d => {
-                return temperatureScale(d.value)
-              }}
-              stroke="#222"
-              strokeWidth={1}
-            />
+            <>
+              <LinePath
+                data={set}
+                curve={curveBasis}
+                x={d => {
+                  return timeScale(Date.parse(d.createdAt).valueOf())
+                }}
+                y={d => {
+                  return temperatureScale(d.value)
+                }}
+                stroke="#222"
+                strokeWidth={1}
+              />
+              <LinearGradient
+                id="area-gradient"
+                // id={'linePathData.chartColor'}
+                from={'#a0a'}
+                to={'#a0aa'}
+                toOpacity={0.1}
+              />
+              <AreaClosed
+                data={set}
+                x={d => {
+                  return timeScale(Date.parse(d.createdAt).valueOf())
+                }}
+                y={d => {
+                  return temperatureScale(d.value)
+                }}
+                yScale={temperatureScale}
+                strokeWidth={1}
+                stroke={`#a0aa`}
+                fill={'url(#area-gradient)'}
+                curve={curveBasis}
+              />
+            </>
           )
         })}
       </Group>

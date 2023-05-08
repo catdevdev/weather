@@ -15,7 +15,7 @@ const ContextOnline = () => {
 
   return (
     <div>
-      <div>Online</div>
+      <div>Real time</div>
       <ButtonGroup size="md">
         <Button
           onClick={() => {
