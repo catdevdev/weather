@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { Outlet, useSearchParams } from 'react-router-dom'
 import { PulseLoader } from 'react-spinners'
+import { io } from 'socket.io-client'
 
 import { useAppDispatch, useAppSelector } from '@shared/hook/redux'
 import ContextBar from '@shared/ui/ContextBar'
@@ -33,6 +34,15 @@ const Overview = () => {
     to: searchParams.get('to'),
     online: searchParams.get('online') as '20min' | '60min' | null,
   })
+
+  useEffect(() => {
+    const socket = io('http://46.175.147.63:9001/')
+    socket.emit('room', 'b92047e5-b481-4374-9fde-12eb295bf373')
+    socket.on('send_last_weather_record', function (data) {
+      console.log(data)
+      alert(data)
+    })
+  }, [])
 
   useEffect(() => {
     dispatch(

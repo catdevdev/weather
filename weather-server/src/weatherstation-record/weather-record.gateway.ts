@@ -1,11 +1,12 @@
 import {
+  ConnectedSocket,
   MessageBody,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Prisma } from '@prisma/client';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
@@ -16,9 +17,12 @@ export class WeatherRecordGateway {
   @WebSocketServer()
   server: Server;
 
-  sendLastWeatherRecord(weatherRecord: Prisma.JsonObject) {
-    console.log('1234');
+  @SubscribeMessage('room')
+  joinRoom(socket: Socket, roomId: string) {
+    socket.join(roomId);
+  }
 
-    this.server.emit('send_last_weather_record', weatherRecord);
+  sendLastWeatherRecord({ roomId, weatherRecord }) {
+    this.server.to(roomId).emit('send_last_weather_record', weatherRecord);
   }
 }

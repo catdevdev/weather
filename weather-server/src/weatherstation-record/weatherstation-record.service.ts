@@ -34,7 +34,10 @@ export class WeatherStationRecordService {
       },
     });
 
-    this.weatherRecordGateway.sendLastWeatherRecord(weatherRecord);
+    this.weatherRecordGateway.sendLastWeatherRecord({
+      roomId: weatherStation.id,
+      weatherRecord,
+    });
   }
 
   async getWeatherRecords(weatherStationId: string, gte: string, lte: string) {
