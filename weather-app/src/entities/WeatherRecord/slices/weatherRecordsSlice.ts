@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 
 import { getWeatherRecords } from '../api'
-import { WeatherRecordState } from '../models'
+import { WeatherRecord, WeatherRecordState } from '../models'
 
 // import { createRocket } from '../api/createRocket/createRocket'
 // import { deleteRocketById } from '../api/deleteRocketById/deleteRocketById'
@@ -18,7 +18,17 @@ const weatherRecordsSlice = createSlice({
     isLoading: true,
     error: undefined,
   } as WeatherRecordState,
-  reducers: {},
+  reducers: {
+    newWeatherRecordsRealTime: (
+      state,
+      action: PayloadAction<any>, // any because WeatherRecord can container random weather parameters
+    ) => {
+      if (state.weatherRecords.length)
+        state.weatherRecords[state.weatherRecords.length - 1].push(
+          action.payload,
+        )
+    },
+  },
   extraReducers: builder => {
     builder.addCase(getWeatherRecords.pending, state => {
       state.isLoading = true

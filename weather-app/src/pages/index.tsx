@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useSearchParams } from 'react-router-dom'
 
 import AuthNavigationSidebar from '@widgets/AuthNavigationSidebar'
 import Layout from '@widgets/Layout'
@@ -12,9 +12,28 @@ import Overview from './Overview'
 import Statistics from './Statistics'
 
 export const Routing = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+    // if (!searchParams.get('weatherstation_id')) {
+    //   setSearchParams({
+    //     weatherstation_id: 'b92047e5-b481-4374-9fde-12eb295bf373',
+    //   })
+    // }
+  }, [])
+
   return (
     <Routes>
       {/* main */}
+      <Route
+        path="*"
+        element={
+          <Navigate
+            to="/overview/b92047e5-b481-4374-9fde-12eb295bf373"
+            replace
+          />
+        }
+      />
       <Route
         element={
           <Layout
@@ -28,11 +47,11 @@ export const Routing = () => {
           />
         }
       >
-        <Route path="/" element={<Overview />}>
-          <Route path="/modal" element={<WeatherstationsMap />} />
-        </Route>
-        <Route path="/statistics" element={<Statistics />} />
-        <Route path="/forecast" element={<Forecast />} />
+        {/* <Route path="/overview/" element={<Overview />}></Route> */}
+        <Route path="/overview/:weatherstation_id" element={<Overview />} />
+        {/* <Route path="/modal" element={<WeatherstationsMap />} /> */}
+        <Route path="/statistics/:weatherstation_id" element={<Statistics />} />
+        <Route path="/forecast/:weatherstation_id" element={<Forecast />} />
       </Route>
       {/* auth */}
       <Route

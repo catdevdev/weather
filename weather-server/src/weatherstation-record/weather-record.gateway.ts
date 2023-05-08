@@ -5,7 +5,7 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Prisma } from '@prisma/client';
+import { Prisma, WeatherRecord } from '@prisma/client';
 import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({
@@ -22,7 +22,13 @@ export class WeatherRecordGateway {
     socket.join(roomId);
   }
 
-  sendLastWeatherRecord({ roomId, weatherRecord }) {
+  sendLastWeatherRecord({
+    roomId,
+    weatherRecord,
+  }: {
+    roomId: string;
+    weatherRecord: WeatherRecord;
+  }) {
     this.server.to(roomId).emit('send_last_weather_record', weatherRecord);
   }
 }

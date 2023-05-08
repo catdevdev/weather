@@ -23,7 +23,7 @@ export class WeatherStationRecordService {
       throw new Error('Wrong api key!');
     }
 
-    await this.prismaService.weatherRecord.create({
+    const createdWeatherRecord = await this.prismaService.weatherRecord.create({
       data: {
         weatherRecord,
         WeatherStation: {
@@ -36,7 +36,7 @@ export class WeatherStationRecordService {
 
     this.weatherRecordGateway.sendLastWeatherRecord({
       roomId: weatherStation.id,
-      weatherRecord,
+      weatherRecord: createdWeatherRecord,
     });
   }
 

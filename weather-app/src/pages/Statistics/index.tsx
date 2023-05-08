@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useParams } from 'react-router-dom'
 import { PulseLoader } from 'react-spinners'
 
 import { useAppDispatch, useAppSelector } from '@shared/hook/redux'
@@ -16,10 +17,12 @@ import Layout from '@widgets/Layout'
 const Statistics = () => {
   const dispatch = useAppDispatch()
 
+  const { weatherstation_id } = useParams()
+
   useEffect(() => {
     dispatch(
       getGroupedAverageWeatherRecords({
-        weatherStationId: '123',
+        weatherStationId: weatherstation_id || '',
         gte: '2023-04-30T21:10:23.055000+00:00',
         lte: '2023-05-02T21:59:17.530000+00:00',
       }),

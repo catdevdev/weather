@@ -6,19 +6,21 @@ from pydantic import BaseModel
 router = APIRouter()
 
 
-class TimeFrame(BaseModel):
+class Args(BaseModel):
     gte: datetime.datetime
     lte: datetime.datetime
+    weatherStationId: str
 
 
 @router.get("/weather-records")
-async def get_weather_records(timeFrame: TimeFrame):
+async def get_weather_records(args: Args):
     weather_records = await prisma.weatherrecord.find_many(
         where={
             "createdAt": {
-                "gte": timeFrame.gte,
-                "lte": timeFrame.lte,
-            }
+                "gte": args.gte,
+                "lte": args.lte,
+            },
+            'weatherStationId': args.weatherStationId
         },
         order={
             "createdAt": "asc"

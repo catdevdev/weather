@@ -1,7 +1,8 @@
 import { ParentSize } from '@visx/responsive'
 import React, { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import { Outlet, useSearchParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Outlet, useParams, useSearchParams } from 'react-router-dom'
 import { PulseLoader } from 'react-spinners'
 import { io } from 'socket.io-client'
 
@@ -24,6 +25,7 @@ import ContextTimeFrame from '@features/ContextTimeFrame'
 import ContextOnline from '@features/ContextOnline'
 
 import { getTimeFrame } from '@entities/WeatherRecord/helper/getTimeFrameForCharts'
+import { weatherRecordsSlice } from '@entities/WeatherRecord/slices/weatherRecordsSlice'
 
 const Overview = () => {
   const dispatch = useAppDispatch()
@@ -35,18 +37,21 @@ const Overview = () => {
     online: searchParams.get('online') as '20min' | '60min' | null,
   })
 
+  const { weatherstation_id } = useParams()
+
   useEffect(() => {
     const socket = io('http://46.175.147.63:9001/')
     socket.emit('room', 'b92047e5-b481-4374-9fde-12eb295bf373')
     socket.on('send_last_weather_record', function (data) {
       console.log(data)
+      dispatch(weatherRecordsSlice.actions.newWeatherRecordsRealTime(data))
     })
   }, [])
 
   useEffect(() => {
     dispatch(
       getWeatherRecords({
-        weatherStationId: '123',
+        weatherStationId: weatherstation_id || '',
         gte: dateFrom,
         lte: dateTo,
       }),
