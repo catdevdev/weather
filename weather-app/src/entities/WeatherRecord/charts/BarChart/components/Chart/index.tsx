@@ -1,5 +1,6 @@
 import { AxisBottom, AxisLeft } from '@visx/axis'
 import { localPoint } from '@visx/event'
+import { GradientTealBlue, LinearGradient } from '@visx/gradient'
 import { Grid } from '@visx/grid'
 import { Group } from '@visx/group'
 import { LegendOrdinal } from '@visx/legend'
@@ -104,6 +105,8 @@ export default function BarChart({
           strokeOpacity={0.1}
           xOffset={dateScale.bandwidth() / 2}
         />
+        <GradientTealBlue id="area-gradient" />
+        {/* <rect width={width} height={height} fill="url(#teal)" rx={14} /> */}
         <Group top={margin.top}>
           {dataSet.map(d => {
             const barWidth = dateScale.bandwidth()
@@ -112,15 +115,19 @@ export default function BarChart({
             const barY = yMax - barHeight
             return (
               <Bar
-                key={`bar-${d.timestamp}`}
+                key={`area-gradient`}
                 x={barX}
                 y={barY}
                 width={barWidth}
                 height={barHeight}
                 fill="rgb(28, 88, 255)"
+                // toOpacity={0.1}
+                // from={'#a0a'}
+                // to={'#a0aa'}
               />
             )
           })}
+
           <AxisLeft
             top={0}
             left={30}

@@ -88,6 +88,11 @@ const Statistics = () => {
                 groupedAverageWeatherRecords.temperatureFromDTH22,
               )}
             />
+            <BarChart
+              dataSet={convert(
+                groupedAverageWeatherRecords.analogSignalFromRainSensor,
+              )}
+            />
           </>
         )}
       </div>

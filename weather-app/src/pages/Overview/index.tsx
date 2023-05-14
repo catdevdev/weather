@@ -123,6 +123,17 @@ const Overview = () => {
             dateFrom={dateFrom}
             dateTo={dateTo}
           />
+          <RegularLineChart
+            valueName="temperature"
+            currentValue={123}
+            dimension="t0"
+            dataSet={convertWeatherRecordsFromChartSet(
+              weatherRecords,
+              'analogSignalFromRainSensor',
+            )}
+            dateFrom={dateFrom}
+            dateTo={dateTo}
+          />
         </div>
       )}
 
