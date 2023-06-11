@@ -1,3 +1,5 @@
 node_modules
 
 **/*.env
+
+weather-algo/weather_records.csv
