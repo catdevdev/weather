@@ -69,6 +69,10 @@ const Overview = () => {
     state => state.weatherRecords.weatherRecords,
   )
 
+  weatherRecords[weatherRecords.length - 1][
+    weatherRecords[weatherRecords.length - 1].length - 1
+  ]
+
   return (
     <>
       <PageHeader>Overview</PageHeader>
@@ -81,8 +85,12 @@ const Overview = () => {
         <div tw="grid grid-cols-2 w-full flex-wrap gap-5">
           <RegularLineChart
             valueName="temperature"
-            currentValue={123}
-            dimension="t0"
+            currentValue={
+              weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ].weatherRecord.temperatureFromDTH22
+            }
+            dimension="°C"
             dataSet={convertWeatherRecordsFromChartSet(
               weatherRecords,
               'temperatureFromDTH22',
@@ -104,7 +112,7 @@ const Overview = () => {
           <RegularLineChart
             valueName="temperature"
             currentValue={123}
-            dimension="t0"
+            dimension="°C"
             dataSet={convertWeatherRecordsFromChartSet(
               weatherRecords,
               'humidityFromDTH22',
