@@ -69,10 +69,6 @@ const Overview = () => {
     state => state.weatherRecords.weatherRecords,
   )
 
-  weatherRecords[weatherRecords.length - 1][
-    weatherRecords[weatherRecords.length - 1].length - 1
-  ]
-
   return (
     <>
       <PageHeader>Overview</PageHeader>
