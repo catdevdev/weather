@@ -80,7 +80,7 @@ const Overview = () => {
       {!isLoading && (
         <div tw="grid grid-cols-2 w-full flex-wrap gap-5">
           <RegularLineChart
-            valueName="temperature"
+            valueName="Temperature"
             currentValue={
               weatherRecords[weatherRecords.length - 1][
                 weatherRecords[weatherRecords.length - 1].length - 1
@@ -95,8 +95,12 @@ const Overview = () => {
             dateTo={dateTo}
           />
           <RegularLineChart
-            valueName="temperature"
-            currentValue={123}
+            valueName="Temperature"
+            currentValue={
+              weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ].weatherRecord.temperatureFromBMP180
+            }
             dimension="t0"
             dataSet={convertWeatherRecordsFromChartSet(
               weatherRecords,
@@ -106,9 +110,13 @@ const Overview = () => {
             dateTo={dateTo}
           />
           <RegularLineChart
-            valueName="temperature"
-            currentValue={123}
-            dimension="°C"
+            valueName="Humidity"
+            currentValue={
+              weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ].weatherRecord.humidityFromDTH22
+            }
+            dimension="%"
             dataSet={convertWeatherRecordsFromChartSet(
               weatherRecords,
               'humidityFromDTH22',
@@ -117,9 +125,13 @@ const Overview = () => {
             dateTo={dateTo}
           />
           <RegularLineChart
-            valueName="temperature"
-            currentValue={123}
-            dimension="t0"
+            valueName="Atmosphere pressure"
+            currentValue={
+              weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ].weatherRecord.pressureFromBMP180
+            }
+            dimension="pa"
             dataSet={convertWeatherRecordsFromChartSet(
               weatherRecords,
               'pressureFromBMP180',
@@ -128,9 +140,13 @@ const Overview = () => {
             dateTo={dateTo}
           />
           <RegularLineChart
-            valueName="temperature"
-            currentValue={123}
-            dimension="t0"
+            valueName="Rain"
+            currentValue={
+              weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ].weatherRecord.analogSignalFromRainSensor
+            }
+            dimension="units"
             dataSet={convertWeatherRecordsFromChartSet(
               weatherRecords,
               'analogSignalFromRainSensor',
