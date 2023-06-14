@@ -47,8 +47,6 @@ const Statistics = () => {
   )
 
   const convert = (dataFromBE: { [s: string]: number }) => {
-    console.log(dataFromBE)
-
     if (!dataFromBE || !Object.entries(dataFromBE).length) {
       return []
     }

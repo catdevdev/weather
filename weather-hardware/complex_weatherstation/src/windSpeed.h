@@ -1,15 +1,19 @@
-#ifndef WIND_SPEED_SENSOR_H
-#define WIND_SPEED_SENSOR_H
+#ifndef WIND_SPEED_H
+#define WIND_SPEED_H
 
-class WindSpeedSensor
-{
-private:
+#include <Arduino.h>
+
+class WindSpeedSensor {
+  private:
     int pin;
+    volatile unsigned long lastSignalTime;
+    volatile float speed;
 
-public:
+  public:
     WindSpeedSensor(int pin);
     void setup();
     void measure();
+    float getSpeed();
 };
 
 #endif

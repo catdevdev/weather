@@ -7,6 +7,8 @@ import 'rsuite/dist/rsuite-no-reset.min.css'
 
 import GlobalStyles from '@shared/styles/GlobalStyles'
 
+import { WeatherStationsMapModalProvider } from '@widgets/WeatherstationsMap/context'
+
 import { Routing } from '@pages/index'
 
 import 'leaflet/dist/leaflet.css'
@@ -23,7 +25,9 @@ root.render(
     <Provider store={setupStore()}>
       <CustomProvider>
         <BrowserRouter>
-          <Routing />
+          <WeatherStationsMapModalProvider>
+            <Routing />
+          </WeatherStationsMapModalProvider>
         </BrowserRouter>
       </CustomProvider>
     </Provider>
