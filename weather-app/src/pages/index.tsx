@@ -44,6 +44,7 @@ export const Routing = () => {
                   tw="rounded-xl bg-neutral-200/50  p-3.5 font-medium cursor-pointer flex items-center  gap-2"
                 >
                   <div>Odessa, Weatherstations map</div>
+
                   <div tw="w-3 h-3 bg-green-500 rounded-3xl" />
                 </div>
               </>
