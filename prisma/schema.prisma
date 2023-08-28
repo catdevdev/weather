@@ -28,20 +28,28 @@ model User {
 }
 
 model WeatherStation {
-  id                  String          @id @default(uuid())
-  latitude            Float
-  longitude           Float
-  api_key             String          @unique
-  User                User?           @relation(fields: [userId], references: [id])
-  userId              Int?
-  weatherRecordSchema Json
-  weatherRecords      WeatherRecord[]
+  id                     String                   @id @default(uuid())
+  latitude               Float
+  longitude              Float
+  api_key                String                   @unique
+  User                   User?                    @relation(fields: [userId], references: [id])
+  userId                 Int?
+  weatherRecordSchema    Json
+  weatherRecords         WeatherRecord[]
+  TippingBucketRainGauge TippingBucketRainGauge[]
 }
 
 model WeatherRecord {
   id               Int             @id @default(autoincrement())
   createdAt        DateTime        @default(now())
   weatherRecord    Json
+  WeatherStation   WeatherStation? @relation(fields: [weatherStationId], references: [id])
+  weatherStationId String?
+}
+
+model TippingBucketRainGauge {
+  id               Int             @id @default(autoincrement())
+  createdAt        DateTime        @default(now())
   WeatherStation   WeatherStation? @relation(fields: [weatherStationId], references: [id])
   weatherStationId String?
 }

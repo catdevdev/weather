@@ -28,6 +28,7 @@ import ContextOnline from '@features/ContextOnline'
 import { getTimeFrame } from '@entities/WeatherRecord/helper/getTimeFrameForCharts'
 import { weatherRecordsSlice } from '@entities/WeatherRecord/slices/weatherRecordsSlice'
 import WindSpeedAndDirection from '@entities/WeatherRecord/charts/WindSpeedAndDirection'
+import WindSpeed from '@entities/WeatherRecord/charts/WindSpeed'
 
 const Overview = () => {
   const dispatch = useAppDispatch()
@@ -103,12 +104,9 @@ const Overview = () => {
           <div tw="grid grid-cols-2 w-full flex-wrap gap-5">
             <RegularLineChart
               valueName="Temperature"
-              currentValue={
-                12
-                // weatherRecords[weatherRecords.length - 1][
-                //   weatherRecords[weatherRecords.length - 1]?.length - 1
-                // ].weatherRecord.temperatureFromDTH22
-              }
+              currentValue={weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1]?.length - 1
+              ]?.weatherRecord?.temperatureFromDTH22?.toFixed(3)}
               dimension="°C"
               dataSet={convertWeatherRecordsFromChartSet(
                 weatherRecords,
@@ -119,12 +117,9 @@ const Overview = () => {
             />
             <RegularLineChart
               valueName="Temperature"
-              currentValue={
-                12
-                // weatherRecords[weatherRecords.length - 1][
-                //   weatherRecords[weatherRecords.length - 1].length - 1
-                // ].weatherRecord.temperatureFromBMP180
-              }
+              currentValue={weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ]?.weatherRecord?.temperatureFromBMP180?.toFixed(3)}
               dimension="°C"
               dataSet={convertWeatherRecordsFromChartSet(
                 weatherRecords,
@@ -135,12 +130,9 @@ const Overview = () => {
             />
             <RegularLineChart
               valueName="Humidity"
-              currentValue={
-                12
-                // weatherRecords[weatherRecords.length - 1][
-                //   weatherRecords[weatherRecords.length - 1].length - 1
-                // ].weatherRecord.humidityFromDTH22
-              }
+              currentValue={weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ]?.weatherRecord?.humidityFromDTH22?.toFixed(3)}
               dimension="%"
               dataSet={convertWeatherRecordsFromChartSet(
                 weatherRecords,
@@ -151,12 +143,9 @@ const Overview = () => {
             />
             <RegularLineChart
               valueName="Atmosphere pressure"
-              currentValue={
-                12
-                // weatherRecords[weatherRecords.length - 1][
-                //   weatherRecords[weatherRecords.length - 1].length - 1
-                // ].weatherRecord.pressureFromBMP180
-              }
+              currentValue={weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ]?.weatherRecord?.pressureFromBMP180?.toFixed(3)}
               dimension="pa"
               dataSet={convertWeatherRecordsFromChartSet(
                 weatherRecords,
@@ -167,12 +156,9 @@ const Overview = () => {
             />
             <RegularLineChart
               valueName="Rain"
-              currentValue={
-                12
-                // weatherRecords[weatherRecords.length - 1][
-                //   weatherRecords[weatherRecords.length - 1].length - 1
-                // ].weatherRecord.analogSignalFromRainSensor
-              }
+              currentValue={weatherRecords[weatherRecords.length - 1][
+                weatherRecords[weatherRecords.length - 1].length - 1
+              ]?.weatherRecord?.analogSignalFromRainSensor?.toFixed(3)}
               dimension="units"
               dataSet={convertWeatherRecordsFromChartSet(
                 weatherRecords,
@@ -185,16 +171,57 @@ const Overview = () => {
         )}
       {!isLoading &&
         weatherstation_id === '40d5b96d-bb16-4936-8918-b5a6bd1e16c5' && (
-          <div>
-            <WindSpeedAndDirection
-              windAngle={
-                weatherRecords[weatherRecords.length - 1][
+          <div tw="flex flex-wrap gap-6 w-full">
+            <div tw="flex gap-6 w-full">
+              <WindSpeedAndDirection
+                windAngle={
+                  weatherRecords[weatherRecords.length - 1][
+                    weatherRecords[weatherRecords.length - 1].length - 1
+                  ]?.weatherRecord?.windAngle
+                }
+                windSpeed={10}
+              />
+              <WindSpeed
+                currentValue={weatherRecords[weatherRecords.length - 1][
                   weatherRecords[weatherRecords.length - 1].length - 1
-                ].weatherRecord.windAngle
-              }
-              windSpeed={10}
-            />
-            {}
+                ]?.weatherRecord?.windSpeed?.toFixed(1)}
+                dimension="m/s"
+                dataSet={convertWeatherRecordsFromChartSet(
+                  weatherRecords,
+                  'windSpeed',
+                )}
+                dateFrom={dateFrom}
+                dateTo={dateTo}
+              />
+            </div>
+            <div tw="flex gap-6 w-full">
+              <RegularLineChart
+                valueName="Temperature"
+                currentValue={weatherRecords[weatherRecords.length - 1][
+                  weatherRecords[weatherRecords.length - 1].length - 1
+                ]?.weatherRecord?.temperature?.toFixed(3)}
+                dimension="°C"
+                dataSet={convertWeatherRecordsFromChartSet(
+                  weatherRecords,
+                  'temperature',
+                )}
+                dateFrom={dateFrom}
+                dateTo={dateTo}
+              />
+              <RegularLineChart
+                valueName="Pressure"
+                currentValue={weatherRecords[weatherRecords.length - 1][
+                  weatherRecords[weatherRecords.length - 1].length - 1
+                ]?.weatherRecord?.atmospheric_pressure?.toFixed(3)}
+                dimension="Pa"
+                dataSet={convertWeatherRecordsFromChartSet(
+                  weatherRecords,
+                  'atmospheric_pressure',
+                )}
+                dateFrom={dateFrom}
+                dateTo={dateTo}
+              />
+            </div>
           </div>
         )}
 

@@ -6,5 +6,9 @@
     ],
     "superBG.activeImage": 0,
     "superBG.url": "",
-    "superBG.opacity": 30
+    "superBG.opacity": 30,
+    "files.associations": {
+        "iterator": "cpp",
+        "*.cpp1": "cpp"
+    }
 }
