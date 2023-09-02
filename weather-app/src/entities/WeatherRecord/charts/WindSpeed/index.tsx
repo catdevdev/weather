@@ -55,6 +55,7 @@ const WindSpeed = ({
   dimension,
 }: Props) => {
   const width = map(currentValue, 0, 10, 0, 100)
+  console.log('test')
 
   return (
     <Container>
