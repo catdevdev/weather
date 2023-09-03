@@ -1,9 +1,9 @@
+stages:
+  - deploy
 
-stages:          # List of stages for jobs, and their order of execution
-  - build-and-run
-
-
-build-and-run:       # This job runs in the build stage, which runs first.
-  stage: build-and-run
+deploy:
+  stage: deploy
   script:
     - docker-compose -f docker-compose.prod.yml up --build -d
+  only:
+    - master # You can specify the branch you want to trigger the deployment on
