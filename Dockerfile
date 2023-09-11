@@ -24,7 +24,7 @@ RUN python3 -m venv /opt/venv
 ADD weather-algo/requirements.txt ./weather-algo
 
 
-RUN pip install --upgrade virtualenv
+RUN pip3 install --upgrade virtualenv
 SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
 # RUN pip3 install -r weather-algo/requirements.txt
 RUN /opt/venv/bin/pip install -r requirements.txt
