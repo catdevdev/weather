@@ -87,7 +87,7 @@ void sendDataToServer(WEATHER_DATA *weather_data)
   Serial.println(weather_data->pressureFromBMP180);
 
   StaticJsonDocument<400> doc;
-  http.begin(wifiClient, "http://46.175.147.63:9001/weatherstation/create-weather-record/74c8d74e-c5a7-4ab0-95e5-a1be43dd3335");
+  http.begin(wifiClient, "http://91.219.61.90:9001/weatherstation/create-weather-record/74c8d74e-c5a7-4ab0-95e5-a1be43dd3335");
   http.addHeader("Content-Type", "application/json");
   JsonObject weatherRecord = doc.createNestedObject("weatherRecord");
   weatherRecord["pressureFromBMP180"] = weather_data->pressureFromBMP180;
