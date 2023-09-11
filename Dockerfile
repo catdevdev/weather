@@ -1,7 +1,9 @@
 FROM node:lts
 
 
-RUN apt-get update && apt-get install -y python3 python3-pip
+RUN apt-get update && apt-get install -y python3 python3.11-venv
+
+ 
 
 WORKDIR /app
 
@@ -19,7 +21,6 @@ RUN yarn install
 
 
 RUN python3 -m venv /opt/venv
-
 ADD weather-algo/requirements.txt ./weather-algo
 
 
@@ -39,5 +40,5 @@ RUN cd ./prisma && ./update_schema.sh node && npx prisma migrate dev --name init
 RUN cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name init
 RUN yarn build
 
-CMD yarn start; /opt/venv/bin/python /app/weather-algo/main.py
+CMD yarn start; . /opt/venv/bin/activate && exec python myapp.py
 
