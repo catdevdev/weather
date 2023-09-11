@@ -19,6 +19,8 @@ RUN yarn install
 
 ADD weather-algo/requirements.txt ./weather-algo
 
+RUN pip install --upgrade virtualenv
+RUN virtualenv -p python3 venv
 SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
 RUN pip3 install -r weather-algo/requirements.txt
 RUN apt install python-is-python3
