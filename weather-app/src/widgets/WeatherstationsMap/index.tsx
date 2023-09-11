@@ -1,3 +1,4 @@
+import React from 'react'
 import { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { useNavigate } from 'react-router-dom'
