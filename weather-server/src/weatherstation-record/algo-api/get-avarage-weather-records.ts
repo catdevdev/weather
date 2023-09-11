@@ -6,16 +6,13 @@ export const getAverageWeatherRecords = (
   weatherStationId: string,
   groupBy: string,
 ) => {
-  return axios.get(
-    'http://46.175.147.63:9002/api/get-average-weather-records',
-    {
-      // return axios.get('http://localhost:9002/api/get-average-weather-records', {
-      data: {
-        gte,
-        lte,
-        weatherStationId,
-        groupBy,
-      },
+  return axios.get('http://91.219.61.90:9002/api/get-average-weather-records', {
+    // return axios.get('http://localhost:9002/api/get-average-weather-records', {
+    data: {
+      gte,
+      lte,
+      weatherStationId,
+      groupBy,
     },
-  );
+  });
 };
