@@ -6,4 +6,4 @@ deploy:
   script:
     - docker-compose -f docker-compose.prod.yml up --build -d
   only:
-    - master # You can specify the branch you want to trigger the deployment on
+    - master
