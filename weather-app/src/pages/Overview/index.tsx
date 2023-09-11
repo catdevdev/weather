@@ -1,9 +1,5 @@
-import { ParentSize } from '@visx/responsive'
-import React, { useEffect, useRef } from 'react'
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import { useDispatch } from 'react-redux'
+import { useEffect, useRef } from 'react'
 import { Outlet, useParams, useSearchParams } from 'react-router-dom'
-import { PulseLoader } from 'react-spinners'
 import { io } from 'socket.io-client'
 
 import { useAppDispatch, useAppSelector } from '@shared/hook/redux'
@@ -11,24 +7,17 @@ import ContextBar from '@shared/ui/ContextBar'
 import Loader from '@shared/ui/Loader'
 import PageHeader from '@shared/ui/PageHeader'
 
+import 'twin.macro'
 import { getWeatherRecords } from '@entities/WeatherRecord/api'
 import RegularLineChart from '@entities/WeatherRecord/charts/RegularLineChart'
+import WindSpeed from '@entities/WeatherRecord/charts/WindSpeed'
+import WindSpeedAndDirection from '@entities/WeatherRecord/charts/WindSpeedAndDirection'
 import { convertWeatherRecordsFromChartSet } from '@entities/WeatherRecord/helper/convertWeatherRecordsFromChartSet'
-
-import { WeatherstationTriggerStatus } from '@features/MapWeatherstationSelect'
-
-import Layout from '@widgets/Layout'
-
-import 'twin.macro'
-import WeatherstationsMap from '@widgets/WeatherstationsMap'
-
-import ContextTimeFrame from '@features/ContextTimeFrame'
-import ContextOnline from '@features/ContextOnline'
-
 import { getTimeFrame } from '@entities/WeatherRecord/helper/getTimeFrameForCharts'
 import { weatherRecordsSlice } from '@entities/WeatherRecord/slices/weatherRecordsSlice'
-import WindSpeedAndDirection from '@entities/WeatherRecord/charts/WindSpeedAndDirection'
-import WindSpeed from '@entities/WeatherRecord/charts/WindSpeed'
+
+import ContextOnline from '@features/ContextOnline'
+import ContextTimeFrame from '@features/ContextTimeFrame'
 
 const Overview = () => {
   const dispatch = useAppDispatch()
@@ -51,7 +40,7 @@ const Overview = () => {
       socketRef.current.close()
     }
 
-    const socket = io('http://46.175.147.63:9001/')
+    const socket = io('http://46.175.147.6Á3:9001/')
     // @ts-ignore
     socketRef.current = socket
 
@@ -182,6 +171,7 @@ const Overview = () => {
                 windSpeed={10}
               />
               <WindSpeed
+                valueName="windSpeed"
                 currentValue={weatherRecords[weatherRecords.length - 1][
                   weatherRecords[weatherRecords.length - 1].length - 1
                 ]?.weatherRecord?.windSpeed?.toFixed(1)}

@@ -1,23 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-} from 'react-router-dom'
-
-import 'twin.macro'
+import { useEffect } from 'react'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import { useNavigate } from 'react-router-dom'
 import { Button } from 'rsuite'
+import 'twin.macro'
 
 import { useAppDispatch, useAppSelector } from '@shared/hook/redux'
 
-import {
-  getWeatherstations,
-  weatherStationsSlice,
-} from '@entities/WeatherStation'
+import { getWeatherstations } from '@entities/WeatherStation'
 
 import { useWeatherStationMapModal } from './context'
 import Printed from './images/3d-printed.png'

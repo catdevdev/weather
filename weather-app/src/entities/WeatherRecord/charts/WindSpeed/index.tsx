@@ -1,32 +1,8 @@
 import { ParentSize } from '@visx/responsive'
-import React from 'react'
 
 import 'twin.macro'
 import Chart from './components/Chart'
-import {
-  Arrow,
-  ArrowContainer,
-  Circle,
-  Container,
-  E,
-  Label,
-  N,
-  NE,
-  NW,
-  S,
-  SE,
-  SW,
-  Tail,
-  W,
-  WindBar,
-  WindBarFilled,
-  WindBarText,
-  WindSpeedContainer,
-  WindSpeedLabel,
-  WindSpeedValue,
-} from './styles'
-
-import _ from 'lodash'
+import { Container, WindBar, WindBarFilled, WindBarText } from './styles'
 
 interface Props {
   currentValue: number
