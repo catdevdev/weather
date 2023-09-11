@@ -1,9 +1,6 @@
 FROM node:lts
 
-
 RUN apt-get update && apt-get install -y python3
-
- 
 
 WORKDIR /app
 
@@ -18,15 +15,10 @@ ADD weather-server/package.json ./weather-server
 ADD weather-algo/package.json ./weather-algo
 
 RUN yarn install
-
-
-RUN python3 -m venv /opt/venv
 ADD weather-algo/requirements.txt ./weather-algo
 
 
-SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
-# RUN pip3 install -r weather-algo/requirements.txt
-RUN /opt/venv/bin/pip install -r requirements.txt
+RUN pip3 install -r weather-algo/requirements.txt
 RUN apt install python-is-python3
 # RUN pip install --no-cache-dir -r /app/weather-algo/requirements.txt
 
