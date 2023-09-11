@@ -1,6 +1,7 @@
 FROM node:lts
 
-RUN apt-get update && apt-get install -y python3
+
+RUN apt-get update && apt-get install -y python3 python3-pip
 
 WORKDIR /app
 
@@ -15,9 +16,10 @@ ADD weather-server/package.json ./weather-server
 ADD weather-algo/package.json ./weather-algo
 
 RUN yarn install
+
 ADD weather-algo/requirements.txt ./weather-algo
 
-
+# SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
 RUN pip3 install -r weather-algo/requirements.txt
 RUN apt install python-is-python3
 # RUN pip install --no-cache-dir -r /app/weather-algo/requirements.txt
@@ -31,5 +33,5 @@ RUN cd ./prisma && ./update_schema.sh node && npx prisma migrate dev --name init
 RUN cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name init
 RUN yarn build
 
-CMD yarn start; . /opt/venv/bin/activate && exec python myapp.py
+CMD yarn start; python /app/weather-algo/main.py
 
