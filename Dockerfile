@@ -17,12 +17,16 @@ ADD weather-algo/package.json ./weather-algo
 
 RUN yarn install
 
+
+RUN python3 -m venv /opt/venv
+
 ADD weather-algo/requirements.txt ./weather-algo
 
+
 RUN pip install --upgrade virtualenv
-RUN virtualenv -p python3 venv
 SHELL ["/bin/bash", "-c", "source /app/weather-algo/venv/bin/activate"]
-RUN pip3 install -r weather-algo/requirements.txt
+# RUN pip3 install -r weather-algo/requirements.txt
+RUN /opt/venv/bin/pip install -r requirements.txt
 RUN apt install python-is-python3
 # RUN pip install --no-cache-dir -r /app/weather-algo/requirements.txt
 
@@ -35,5 +39,5 @@ RUN cd ./prisma && ./update_schema.sh node && npx prisma migrate dev --name init
 RUN cd ./prisma && ./update_schema.sh python && npx prisma migrate dev --name init
 RUN yarn build
 
-CMD yarn start; python /app/weather-algo/main.py
+CMD yarn start; /opt/venv/bin/python /app/weather-algo/main.py
 
