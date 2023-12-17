@@ -10,4 +10,4 @@ ports:
 9001-nest-server
 9002-python-server
 
-9011-database-postgres-dev (located on remote machine)
+9012-database-postgres-dev (located on remote machine)
