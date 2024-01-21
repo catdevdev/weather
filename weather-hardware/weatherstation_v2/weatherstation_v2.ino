@@ -34,34 +34,34 @@ LoRa_E22 e22ttl100(PIN_RX, PIN_TX, PIN_AX, PIN_M0, PIN_M1);
 
 struct WEATHER_DATA
 {
-//  char username[30] = "weatherstation_home";
-//  char password[30] = "4311067vladvk";
+  //  char username[30] = "weatherstation_home";
+  //  char password[30] = "4311067vladvk";
   int pressureFromBMP180;
   double temperatureFromBMP180;
   double temperatureFromDTH22;
   double humidityFromDTH22;
   int analogSignalFromRainSensor;
-//  int rssi;
+  //  int rssi;
 };
 
-//struct WEATHER_STATION_AUTH
+// struct WEATHER_STATION_AUTH
 //{
-//  String token;
-//  boolean isAuthorized = false;
-//};
+//   String token;
+//   boolean isAuthorized = false;
+// };
 
 WEATHER_DATA ownWeatherData;
-//WEATHER_DATA weatherDataFromSomeWeatherStation;
+// WEATHER_DATA weatherDataFromSomeWeatherStation;
 
-//WEATHER_STATION_AUTH ownWeatherStationAuth;
-//WEATHER_STATION_AUTH someWeatherStationAuth;
+// WEATHER_STATION_AUTH ownWeatherStationAuth;
+// WEATHER_STATION_AUTH someWeatherStationAuth;
 
 void setup()
 {
   Serial.begin(9600);
-//  Serial.println("starting e22 sensor...");
-//  e22ttl100.begin();
-//  Serial.println("success");
+  //  Serial.println("starting e22 sensor...");
+  //  e22ttl100.begin();
+  //  Serial.println("success");
 
   Serial.println("starting wifi...");
   WiFi.begin(ssid, password);
@@ -87,7 +87,7 @@ void sendDataToServer(WEATHER_DATA *weather_data)
   Serial.println(weather_data->pressureFromBMP180);
 
   StaticJsonDocument<400> doc;
-  http.begin(wifiClient, "http://91.219.61.90:9001/weatherstation/create-weather-record/74c8d74e-c5a7-4ab0-95e5-a1be43dd3335");
+  http.begin(wifiClient, "http://109.200.237.153:9001/weatherstation/create-weather-record/74c8d74e-c5a7-4ab0-95e5-a1be43dd3335");
   http.addHeader("Content-Type", "application/json");
   JsonObject weatherRecord = doc.createNestedObject("weatherRecord");
   weatherRecord["pressureFromBMP180"] = weather_data->pressureFromBMP180;
@@ -119,5 +119,4 @@ void loop()
     sendDataToServer(&ownWeatherData);
     previousTime = currentTime;
   }
-
 }

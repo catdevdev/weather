@@ -14,7 +14,7 @@
 const char *ssid = "JOJO 2.4G";
 const char *password = "1234567890bb";
 
-const char *serverBaseURL = "http://91.219.61.90:9001";
+const char *serverBaseURL = "http://109.200.237.153:9001";
 
 #define BMP_SCK 14
 #define BMP_MISO 12
