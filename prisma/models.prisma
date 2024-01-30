@@ -1,7 +1,6 @@
 datasource db {
   provider = "postgresql"
-  // url      = env("DATABASE_URL")
-  url      = "postgresql://weather:fugewjrlwerjweldoifjv4j829v82398h2f9h298d9j2d92j3d889dj28djdovi1221@192.168.1.78:9012/weather?schema=public"
+  url      = "postgresql://weather:fugewjrlwerjweldoifjv4j829v82398h2f9h298d9j2d92j3d889dj28djdovi1221@109.200.237.153:9012/weather?schema=public"
 }
 
 model User {
