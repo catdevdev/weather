@@ -7,7 +7,7 @@ export const getAverageWeatherRecords = (
   groupBy: string,
 ) => {
   return axios.get(
-    'http://109.200.237.153:9002/api/get-average-weather-records',
+    'http://46.250.23.244:9002/api/get-average-weather-records',
     {
       // return axios.get('http://localhost:9002/api/get-average-weather-records', {
       data: {

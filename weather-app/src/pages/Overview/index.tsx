@@ -41,7 +41,7 @@ const Overview = () => {
       socketRef.current.close()
     }
 
-    const socket = io('http://109.200.237.153:9001/')
+    const socket = io('http://46.250.23.244:9001/')
     // @ts-ignore
     socketRef.current = socket
 
